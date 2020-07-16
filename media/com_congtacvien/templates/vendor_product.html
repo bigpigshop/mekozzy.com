@@ -1,0 +1,24 @@
+<div class="card" style="width: 18rem;">
+    <a ng-href="{{product.link}}" title="{{product.product_name}}">
+        <img ng-src="/{{product.imageUrl}}" height="20rem" class="card-img-top" alt="{{product.product_name}}">
+    </a>
+    <div class="card-body">
+        <h5 class="card-title"><a ng-href="{{product.link}}" title="{{product.product_name}}">{{product.product_name}}</a></h5>
+        <p class="card-text">
+            <div>Mã SP: {{product.product_sku}}</div>
+            <div class="category">Nhóm SP: {{product.category_name}}</div>
+            <div class="text-warning fa-2x">
+                {{product.priceFormatted}}
+            </div>
+        </p>
+
+        <button popover-class="product-small-item_content_popup" ng-show="product.product_desc"
+                popover-trigger="'mouseenter'"
+                uib-popover="{{product.product_desc}}"
+                popover-title="{{product.product_name}}" type="button"
+                class="btn btn-secondary btn-sm"><i class="fa fa-info-circle"></i> Desc
+        </button>
+        <a class="btn btn-sm btn-info pull-right" ng-href="{{product.link}}" title="{{product.product_name}}"><i class="fa fa-shopping-cart"></i> Cho vào giỏ</a>
+
+    </div>
+</div>

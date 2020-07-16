@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-2"><img ng-src="/{{product.imageUrl}}" class="img-rounded" /></div>
+            <div class="col-md-10">
+                <div class="pull-right float-right">
+                    <button ng-if="product.inVendorStore" class="btn btn-sm btn-warning" ng-click="removeFromToCart(product.virtuemart_product_id)" title="Xóa sản phẩm ra khỏi danh sách của bạn"><i class="fa fa-remove"></i> Bỏ chọn</button>
+                    <button ng-if="!product.inVendorStore" class="btn btn-sm btn-success" ng-click="addToCart(product.virtuemart_product_id)" title="Thêm sản phẩm vào gian hàng của bạn"><i class="fa fa-shopping-cart"></i> Cart</button>
+                </div>
+
+                <h2 class="card-title"><a href="{{product.link}}" target="_blank">{{product.product_name}} <i class="fa fa-external-link text-info"></i></a></h2>
+                <div class="card-subtitle mb-2 text-muted">Nhóm SP: {{product.category_name}}</div>
+                <div>Mã SP: {{product.product_sku}}</div>
+                <div class="">
+                    Giá: <span class="text-warning font-weight-bold">{{product.priceFormatted}}</span>
+                </div>
+                <div class="text-info my-2">{{product.product_desc}}</div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,9 @@
+.slider-nav .slick-slide { cursor: pointer; }
+.item-time-w{}
+.item-deals{
+	background-color: #fff;
+    border: 1px solid #e5e5e5;
+    display: inline-block;
+    width: 100%;
+}
+

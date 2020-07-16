@@ -1,0 +1,1 @@
+{"color":{"titleBg":"e7257b","titleTxtSize":"14","titleTxtCl":"ffffff","titleTxtFont":"6","titleIcon":"opc-iconemo-devil","contentBg":"ffffff","contentTxtFont":"6"},"options":{"htmltitle":"Title","htmlContent":"   ","showtitle":0}}

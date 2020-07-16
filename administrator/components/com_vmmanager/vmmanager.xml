@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+	<name>com_vmmanager</name>
+	<author>CmsMart</author>
+	<creationDate>Jun 2015</creationDate>
+	<copyright>(C) 2005 - 2014 Open Source Matters. All rights reserved.	</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>admin@netbase.com</authorEmail>
+	<authorUrl></authorUrl>
+	<version>5.4.10</version>
+	<description>COM_VMMANAGER_DES</description>
+	<files folder="site">
+        <folder>assets</folder>
+        <folder>helpers</folder>
+        <folder>language</folder>
+        <folder>models</folder>
+        <folder>tables</folder>
+        <folder>views</folder>
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+		<filename>vmmanager.php</filename>
+	</files>
+	<administration>
+		<menu img="class:vmmanage">com_vmmanager</menu>
+		<files folder="admin">
+            <folder>assets</folder>
+            <folder>controllers</folder>
+            <folder>extension</folder>
+            <folder>helpers</folder>
+            <folder>language</folder>
+            <folder>models</folder>
+            <folder>sql</folder>
+            <folder>tables</folder>     
+            <folder>views</folder>   
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+            <filename>index.html</filename>
+            <filename>vmmanager.php</filename>
+		</files>
+	</administration>
+    <installfile>script.extension.php</installfile>
+	<uninstallfile>script.extension.php</uninstallfile>
+	<scriptfile>script.extension.php</scriptfile>
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">sql/onepage.sql</file>
+        </sql>
+    </install>
+</extension>
+
+

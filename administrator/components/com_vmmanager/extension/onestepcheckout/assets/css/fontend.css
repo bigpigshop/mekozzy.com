@@ -1,0 +1,686 @@
+/*--------------------------------------------------------------------------------------------------------*/
+/*---Render OPC----*/
+.render_{
+    overflow: hidden;
+}
+#opc-wapper{
+    position: relative;
+    margin-bottom: 30px;
+}
+#opc-wapper > .opc-module{
+    position: absolute;
+    padding: 10px 5px;
+}
+#opc-billTo.opc-module{overflow: inherit;}
+#opc-wapper > .opc-module > .opc-module-content{
+    border: 1px solid #d0d0d0;
+    line-height: initial;
+}
+#opc-wapper.ajax-running::before{
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(221, 221, 221, 0.65);
+    z-index: 999;
+    background-image: url('../images/loading_dark_large.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+}
+/*Responsive*/
+.media-480#opc-wapper{height: auto!important;}
+.media-480#opc-wapper > .opc-module{position: relative;display: block;width:100%!important;left:0!important;top: inherit!important;}
+/*---------------------------------------------------------------------------------------------------------*/
+/*--- checkbox ---*/
+input[type=checkbox].checkbox-input {
+	position:absolute;
+	z-index:-1000;
+	left:-1000px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	height:1px;
+	width:1px;
+	margin:-1px;
+	padding:0;
+	border:0;
+}
+input[type=checkbox].checkbox-input + label.checkbox-label {
+	padding-left: 26px;
+	height: 17px;
+	display:inline-block;
+	line-height: 17px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	cursor:pointer;
+	font-size: 12px!important;
+}
+input[type=checkbox].checkbox-input:checked + label.checkbox-label {
+	background-position: 0 -17px;
+}
+label.checkbox-label {
+	background-image: url(../images/checkbox.png);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+/*-----Header OPC-----*/
+#header-OPC{
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 0 15px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #eeeeee;
+}
+#header-OPC h2{
+    margin: 0;
+    float: left;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: #2b2b2b;
+    font-weight: normal;
+    line-height: inherit;
+}
+#header-OPC p{
+    float: right;
+    font-size: 20px;
+    color: #2b2b2b;
+    margin: 0;
+    line-height: inherit;
+}
+#header-OPC p a{
+    font-size: 20px;      color: #2b2b2b;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+}
+#header-OPC p a:hover{text-decoration:none}
+#header-OPC p i{
+    margin-left: 10px;
+    font-size: 16px;
+    color: #333;
+    font-weight: normal;
+}
+/*-- Title module------*/
+.opc-module-content h2.opc-title{
+    margin: 0;
+    padding: 5px 10px;
+    vertical-align: middle;
+    position: relative;
+    padding-left: 40px;
+    line-height: 25px;
+}
+.opc-module-content h2.opc-title span{
+    margin-left: 10px;
+    font-weight: bold;
+}
+.opc-module-content h2.opc-title i{
+    width: 40px;
+    display: inline-block;
+    background-color: rgba(6, 6, 6, 0.12);
+    margin: auto;
+    line-height: 34px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    font-size: 18px;
+}
+/*-- Form ------------*/
+.opc-module-content form.opc-form{
+    padding: 15px;
+    margin: 0;
+    display: flow-root;
+    width: auto;
+}
+.opc-module-content form.opc-form#priceForm{
+    padding: 0;
+}
+
+
+
+.text-opc{
+    padding: 0 5px;
+}
+.text-opc p{
+    margin: 0;
+}
+/*-- Login -----------------------*/
+/*Login popup*/
+#submit-logout{
+    height: 25px;
+    display: inline-block;
+    line-height: 25px;
+    background-color: #444;
+    padding: 0 10px;
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.LoginPopup{
+    display:none;
+    width: 310px;
+    overflow: hidden;
+    position: fixed;
+    box-shadow: rgb(0, 0, 0) -3px 0px 50px 0px;
+    z-index: 9999;
+}
+.logIn-popup{
+    font-family: 'Roboto', sans-serif;
+    color: #54a7ec!important;
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px 0;
+}
+.logIn-popup:hover{text-decoration: underline;}
+body .overlayLogin{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+.opc-module-content h2.opc-title i.close-logIn{
+    border-radius: 0;
+    
+    border: 0;
+    position: absolute;
+    right: 4px;
+    top: -2px;
+    font-size: 17px;
+    background-color: rgba(80, 77, 75, 0.44);
+    text-align: center;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    cursor: pointer;
+    left: inherit;
+}
+.opc-module-content form.opc-form#logInForm h3{
+    font-weight: normal;
+}
+form#logInForm p.opc-login-val{}
+form#logInForm p.opc-login-val span{
+    display: inline-block;
+    min-width: 85px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: top;
+    overflow: hidden;
+}
+form#logInForm p.opc-login-val span i{
+    color: #ff6262;
+    display: inline-block;
+    margin: 0 0 0 3px;
+    line-height: 20px;
+}
+form#logInForm p.opc-login-val input{
+    height: 20px;
+    padding: 0 10px;
+    background-color: #fff;
+    margin: 0;
+    border-radius: 0;
+    max-width: 169px;
+}
+
+/*End popup*/
+form#logInForm h3{
+    margin: 0;
+    padding: 10px 0;
+    font-size: 13px;
+}
+form#logInForm div#notice-login{
+    margin-top: 6px;
+    color: #ff6262;
+}
+form#logInForm div#notice-login p{
+    display:none;
+    margin: 0;
+    padding: 5px 5px;
+    background-color: rgba(165, 22, 22, 0.16);
+}
+form#logInForm div.opc-login-action .login-remember{
+    margin: 0;
+    text-align: right;
+    max-width: 279px;
+}
+form#logInForm div.opc-login-action .login-remember label{
+    display: inline-block;
+}
+form#logInForm div.opc-login-action .login-remember input{
+    margin: 0;
+}
+form#logInForm div.opc-login-action .action-login{
+    margin: 0;
+    text-align: right;
+    max-width: 279px;
+}
+form#logInForm div.opc-login-action .action-login span{
+    display: inline-block;
+    height: 30px;
+    width: 80px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #444444;
+    color: #fff;
+    cursor: pointer;
+}
+
+form#logInForm div.opc-login-action .action-help{}
+form#logInForm div.opc-login-action .action-login a{
+    color: #3d7aac;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+}
+form#logInForm div.opc-login-action .action-login a:hover{text-decoration:underline;background-color: transparent;}
+/*____________________________________________________*/
+/*------------- Bill To ShipTo -----------------------*/
+/*____________________________________________________*/
+form#billToForm ul,form#shipToForm ul{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+form#billToForm > ul > li,form#shipToForm > ul > li{
+    width: 47%;
+    display: block;
+    margin-bottom: 5px;
+    float: left;
+}
+form#billToForm ul li:nth-child(2n+1),form#shipToForm ul li:nth-child(2n+1){
+    margin-right: 5%;
+}
+form#billToForm ul li input,form#shipToForm ul li input{
+    width: 100%!important;
+    height: 30px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+form#billToForm ul li input[type="radio"],form#shipToForm ul li input[type="radio"]{
+    width:auto !important;
+    height:auto;
+}
+form#billToForm ul li > label,form#shipToForm ul li > label{}
+form#billToForm ul li > select, form#shipToForm ul li > select{
+    width: 100%!important;
+    border-radius: 0;
+}
+form#billToForm ul li > label i,form#shipToForm ul li > label i{}
+form#shipToForm .opc-useShipTo label{  margin: 0 0 10px;}
+form#shipToForm .opc-useShipTo label input[name="userShipTo"]{  margin: 0;}
+/*Create cart*/
+#billToForm .create-account{clear: both;}
+#billToForm .create-account .check-box{}
+#billToForm .create-account .user-info{
+    clear: both;
+    margin-top: 10px;
+    display: none;
+}
+#billToForm .create-account .user-info ul{
+    overflow: hidden;
+}
+#billToForm .create-account .user-info ul li{
+    width: 47%;
+    float: left;
+}
+.opc-media-319 #billToForm .create-account .user-info ul li{
+    width:100%;
+    float:none;
+}
+/*Select type*/
+.opc-module form#billToForm ul li .chzn-container,.opc-module form#shipToForm ul li .chzn-container{width:100%!important;background-color: #fff;border-radius: 4px;}
+.opc-module .chzn-container-single .chzn-single{margin: 0;border-radius: 4px;background: #fff;height: 30px;line-height: 30px;border-color: #d7d7d7;box-shadow: none;}
+.opc-module .chzn-container-single .chzn-single span{border-right: 1px solid #d7d7d7;}
+.opc-module .chzn-container-single .chzn-single div b{background-position: -3px 2px;max-width: 15px}
+.opc-module .chzn-container-active .chzn-single-with-drop div b{background-position: -21px 2px;max-width: 15px}
+.opc-module .chzn-container-single .chzn-drop{box-sizing: border-box;width: 100%!important;}
+/*Shipment*/
+.opc-module-content form.opc-form#shipmentForm .opc-shipment{overflow:hidden;margin-bottom: 7px;}
+.opc-module-content form.opc-form#shipmentForm label{
+    display: block;
+    width: auto;
+    overflow: hidden;
+    line-height: initial;
+}
+.opc-module-content form.opc-form#shipmentForm input{
+    float: left;
+    margin: 2px 10px 0 0px;
+    overflow: hidden;
+}
+/*Payment*/
+.opc-module-content form.opc-form#paymentForm .opc-payment{
+    overflow: hidden;
+}
+.opc-module-content form.opc-form#paymentForm .opc-payment input{
+    float: left;
+    margin: 2px 10px 0 0;
+    overflow: hidden;
+}
+.opc-module-content form.opc-form#paymentForm .opc-payment label{
+    width: auto;
+    display: block;
+    overflow: hidden;
+    line-height: initial;
+}
+.opc-payment .vmpayment_cardinfo{
+    
+}
+.opc-payment .vmpayment_cardinfo table{}
+.opc-payment .vmpayment_cardinfo table tr{}
+.opc-payment .vmpayment_cardinfo table tr td{
+    vertical-align: top;
+    display: block;
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+    white-space: initial;
+}
+.opc-payment .vmpayment_cardinfo table tr td input{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 5px;
+    margin: 0!important;
+    height: 25px;
+    border-radius: 0;
+    border-color: #d0d0d0;
+    float: none!important;
+}
+.opc-payment .vmpayment_cardinfo table tr td select{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.opc-payment .vmpayment_cardinfo table tr td select#cc_expire_year_1,.opc-payment .vmpayment_cardinfo table tr td select#cc_expire_month_1{    width: 70px;}
+
+/*----- Width 319px -------*/
+.opc-media-319 form#billToForm ul,.opc-media-319 form#shipToForm ul{
+    padding: 0;
+}
+.opc-media-319 form#billToForm > ul > li,.opc-media-319 form#shipToForm > ul > li{
+    display: block;
+    float: none;
+    width: 100%;
+}
+.opc-media-319 form#billToForm ul li input,.opc-media-319 form#shipToForm ul li input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.opc-module form#shipToForm .opc-useShipTo label{}
+.opc-module form#shipToForm .opc-useShipTo label input[name="userShipTo"]{}
+
+
+
+/*-- Delivery ---------------------------------------------------------------*/
+form#deliveryForm .select-date{margin-bottom: 10px;}
+form#deliveryForm .select-date h3,form#deliveryForm .select-time h3{
+    margin: 0;
+    padding: 5px 0;
+}
+form#deliveryForm .select-date h3 i.logo,form#deliveryForm .select-time h3 i.logo{margin-right: 5px;font-size: 18px;}
+form#deliveryForm .select-date h3 span,form#deliveryForm .select-time h3 span{
+    font-weight: normal;
+}
+form#deliveryForm .select-date .datepicker-input,form#deliveryForm .select-time .timepicker-input{
+    margin: 0;
+    cursor: pointer;
+    background-color: #fff;
+    box-sizing: border-box;
+    height: 30px;
+    width: 40%;
+    border-radius: 4px;
+    border-color: #d7d7d7;
+    display: inline-block;
+}
+form#deliveryForm .select-date > span,form#deliveryForm .select-time > span{
+    text-align: center;
+    margin: 0 5px;
+}
+/*Width < 320*/
+.opc-media-319 form#deliveryForm .select-date .datepicker-input,.opc-media-319 form#deliveryForm .select-time .timepicker-input{
+    width: 100%;
+}
+.opc-media-319 form#deliveryForm .select-date > span,.opc-media-319 form#deliveryForm .select-time > span{
+    margin: 7px 0;
+    display: block;
+    text-align: left;
+}
+
+/*--- Comfirm Order ---*/
+.opc-module-content form.opc-form#checkoutForm{overflow: hidden;}
+#opc-confirm div.customer_note{
+    float: left;
+    box-sizing: border-box;
+    width: 50%;
+    padding-right: 10px;
+}
+#opc-confirm div.tos-submit{
+    float: left;
+    box-sizing: border-box;
+    width: 50%;
+    padding-left: 10px;
+}
+#opc-confirm.opc-media-319 div.customer_note,#opc-confirm.opc-media-400 div.customer_note{
+    width: 100%;
+    float: none;
+    padding: 0;
+}
+#opc-confirm.opc-media-319 div.tos-submit,#opc-confirm.opc-media-400 div.tos-submit{
+    float: none;
+    width: 100%;
+    padding: 0;
+}
+
+#opc-confirm .customer-note{font-weight: bold;}
+#opc-confirm textarea{min-height: 100px; border-color: #d0d0d0;border-radius: 4px;box-sizing: border-box;}
+#opc-confirm input.terms-of-service{ margin: 0;}
+#opc-confirm .terms-of-service label{ margin: 7px 0;}
+#opc-confirm .terms-of-service label a{color: #54a7ec;text-decoration: none;}
+#opc-confirm .terms-of-service label a:hover{text-decoration: underline;}
+#opc-confirm #submit_order_done{
+    font-size: 16px;
+    background-color: #444444;
+    color: #fff;
+    padding: 0 30px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    float: left;
+    cursor: pointer;
+}
+#opc-confirm .submit_order{overflow: hidden;display: inline-block;}
+
+
+/*------ Order Review -----------*/
+.opc-table {width:100%;}
+.opc-table .order-title{
+    overflow: hidden;
+    background-color: #eee;
+    padding: 0 7px;
+}
+.opc-table .order-product{
+    padding: 7px;
+    margin: 7px 0 0;
+    border-bottom: 1px solid #d0d0d0;
+    clear: both;
+}
+.opc-table ul{
+    margin: 0;
+    padding: 0;
+}
+.opc-table .order-product li,.opc-table .order-title li{
+    list-style: none;
+    overflow: hidden;
+    text-align: center;
+    float: right;
+    height: 30px;
+    line-height: 30px;
+    padding: 5px;
+}
+.opc-table .order-title li{
+    font-size: 14px;
+    font-weight: bold;
+    color: #222;
+}
+.opc-table .order-product li{
+    min-height: 35px;
+    line-height: normal;
+    padding: 7px 5px;
+    height: auto;
+    text-align: left;
+}
+
+.opc-table .opc-order-name{
+    float: none!important;
+    width: auto;
+}
+.opc-table li.opc-order-price{width: 70px;}
+.opc-table li.opc-order-qty{width: 75px;position: relative;}
+.opc-table li.opc-order-tax{width: 70px;text-align: center;}
+.opc-table li.opc-order-discount{width: 70px;text-align: center;}
+.opc-table li.opc-order-total{width: 70px;text-align: center;}
+.opc-table li.opc-order-total span{display: block;}
+.opc-table li.opc-order-qty .quantity_product{
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    margin: 0;
+    text-align: center;
+    margin-left: 7px;
+}
+.opc-table .order-product li.opc-order-qty{
+    text-align: left;
+}
+.opc-table .opc-order-qty .delete-product-cart{
+    position: absolute;
+    top: 11px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #999;
+}
+.opc-table .opc-order-qty .update-quantity{
+    position: absolute;
+    top: 11px;
+    font-size: 16px;
+    cursor: pointer;
+    right: 0px;
+    color: #999;
+}
+.order-result{
+    overflow: hidden;
+    padding: 0 7px;
+    clear: both;
+}
+.order-result ul{
+    overflow: hidden;
+    margin: 0;
+}
+.order-result li{
+    float: right;
+    list-style: none;
+    padding: 7px 5px;
+    text-align: center;
+    overflow: hidden;
+}
+.order-result li.total{
+    font-size: 18px;
+    font-weight: bold;
+}
+.order-result li.result-title{
+    overflow: hidden;
+    width: auto;
+    float: none;
+    text-align: right;
+    padding-right: 10px;
+    border-right: 1px solid #d0d0d0;
+}
+.order-result li.result-title.total{
+    font-size: 16px;
+    font-weight: bold;
+    color: #4b4a4a;
+}
+.order-result li.result-tax{
+    width: 50px;
+}
+.order-result li.result-discount{
+    width: 70px;
+}
+.order-result li.result-total{
+    width: 50px;
+}
+.opc-order-name .cart-images{ 
+    text-align: left;
+    border: 1px solid #d0d0d0;
+    display: block;
+    float:left;
+    overflow: hidden;
+    margin-right: 15px;
+    width: 45px;
+}
+.opc-order-name .cart-images img{
+    width: 100%
+}
+.opc-order-name .name-val{
+    width: auto;
+    overflow: hidden;
+}
+.opc-order-name .name-val a{
+    color: #54a7ec;
+    text-decoration: none;
+    display: block;
+}
+.opc-order-name .name-val a:hover{
+    text-decoration: underline;
+    background: transparent;
+}
+/*--- CouponCpde ---*/
+.order-coupon-code{    padding: 7px;
+    border-top: 1px solid #d0d0d0;
+}
+.order-coupon-code input.couponOpc{
+    height: 30px;
+    border: 1px solid #d0d0d0;
+    padding: 0 10px;
+    max-width: 85%;
+}
+.order-coupon-code span#addCouponCode{
+    height: 32px;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0 15px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+/*-- Responsive--*/
+.opc-media-400 .opc-table li.opc-order-price,.opc-media-480 .opc-table li.opc-order-price,.opc-media-319 .opc-table li.opc-order-price{display: none;}
+.opc-media-400 .opc-order-name .cart-images, .opc-media-319 .opc-order-name .cart-images,.opc-media-480 .opc-order-name .cart-images,.opc-media-600 .opc-order-name .cart-images{display:none;}
+.opc-media-400 .opc-table li.opc-order-tax,.opc-media-319 .opc-table li.opc-order-tax{display:none}
+.opc-media-400 .opc-table li.opc-order-discount,.opc-media-319 .opc-table li.opc-order-discount{display:none}
+.opc-media-400 .order-result li.result-tax,.opc-media-400 .order-result li.result-discount{display:none}
+.opc-media-319 .order-result li.result-tax,.opc-media-319 .order-result li.result-discount{display:none}
+
+@media (max-width: 490px){
+    #header-OPC h2{
+    width: 100%;
+    float: none;
+    line-height: initial;
+    margin-bottom: 15px;
+}  
+    #header-OPC p{
+    float: none;
+    line-height: initial;
+    display: block;
+}  
+}

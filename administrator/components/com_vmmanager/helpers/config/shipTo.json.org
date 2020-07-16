@@ -1,0 +1,1 @@
+{"color":{"titleBg":"e7257b","titleTxtSize":"14","titleTxtCl":"ffffff","titleTxtFont":"6","titleIcon":"opc-iconinfo","contentBg":"ffffff","contentTxtSize":"13","contentTxtCl":"333333","contentTxtFont":"6"}}

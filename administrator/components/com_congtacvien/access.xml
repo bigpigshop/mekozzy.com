@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<access component="com_congtacvien">
+	<section name="component">
+		<action name="config.admin" title="Config - Admin" description="" />
+		<action name="config.edit" title="Config - Edit" description="" />
+		<action name="config.editown" title="Config - Editown" description="" />
+		<action name="config.view" title="Config - View" description="" />
+
+		<action name="shop.admin" title="Shop - Admin" description="" />
+		<action name="shop.edit" title="Shop - Edit" description="" />
+		<action name="shop.editown" title="Shop - Editown" description="" />
+		<action name="shop.view" title="Shop - View" description="" />
+
+		<action name="thuong.admin" title="Luong Thuong - Admin" description="" />
+		<action name="thuong.edit" title="Luong Thuong - Edit" description="" />
+		<action name="thuong.editown" title="Luong Thuong - Editown" description="" />
+		<action name="thuong.view" title="Luong Thuong - View" description="" />
+
+		<action name="dashboard.admin" title="Dashboard - Admin" description="" />
+		<action name="dashboard.edit" title="Dashboard - Edit" description="" />
+		<action name="dashboard.editown" title="Dashboard - Editown" description="" />
+		<action name="dashboard.view" title="Dashboard - View" description="" />
+
+	</section>
+
+</access>

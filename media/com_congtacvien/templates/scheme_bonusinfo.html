@@ -1,0 +1,8 @@
+<div class="text-info row-fluid" style="margin-top: 1rem">
+    <div class="col-7 text-capitalize text-right">Ngưỡng doanh số (VNĐ)</div>
+    <div class="col-5 text-center">Phần % thưởng</div>
+</div>
+<div class="row-fluid" ng-repeat="tmp in profileInfo">
+    <div class="col-7 text-right">{{tmp.nguong | number}}</div>
+    <div class="col-5 text-center">{{tmp.bonus}}%</div>
+</div>

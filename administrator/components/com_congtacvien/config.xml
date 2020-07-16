@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<fieldset
+		name="Component"
+		label="CONGTACVIEN Config"
+		description="Configuration of API Component">
+		<field name="vendor_shopmenu_id"
+			label="Vendor Shop Menu"
+			type="menuitem"
+			class="input">
+
+
+		</field>
+	</fieldset>	
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="JCONFIG_PERMISSIONS_DESC"
+		>
+		<field
+			name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			class="inputbox"
+			validate="rules"
+			filter="rules"
+			component="com_congtacvien"
+			section="component" />
+	</fieldset>
+</config>

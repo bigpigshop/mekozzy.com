@@ -1,0 +1,27 @@
+# Avoid tracking backup
+*.jpa
+
+# Backups
+administrator/components/com_akeeba/backup/*
+
+# Local errors
+log/*
+logs/*
+administrator/logs/*
+
+# Sublime Text
+*.sublime*
+
+# Local cache
+cache/*
+administrator/cache/*
+components/com_sh404sef/cache/*
+
+# Temp files
+tmp/*
+
+# Avoid tracking htaccess to avoid local folder protection
+.htaccess
+
+.idea/*
+configuration.php

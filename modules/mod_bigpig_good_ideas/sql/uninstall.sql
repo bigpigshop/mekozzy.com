@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS `#__mekozzy_bigpig_good_ideas`;

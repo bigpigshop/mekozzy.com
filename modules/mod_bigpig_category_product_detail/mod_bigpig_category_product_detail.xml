@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.0" client="site" method="upgrade">
+    <name>BigPig Category Product Detail</name>
+    <creationDate>June 2020</creationDate>
+    <author>BigPig</author>
+    <copyright>Copyright (c) 2020</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+    <authorEmail>phuc.phamminh@csn.com.vn</authorEmail>
+    <authorUrl>https://mekozzy.com</authorUrl>
+    <version>1.1.0</version>
+    <description>BigPig Category Product Detail</description>
+    <files>
+        <filename module="mod_bigpig_category_product_detail">mod_bigpig_category_product_detail.php</filename>
+        <filename>index.html</filename>
+        <folder>assets</folder>
+        <folder>core</folder>
+        <folder>language</folder>
+        <folder>tmpl</folder>
+    </files>
+    <languages/>
+    <config>
+        <fields name="params" addfieldpath="/modules/mod_bigpig_category_product_detail/core/fields">
+            <fieldset name="SOURCE_OPTIONS_LABEL" label="SOURCE_OPTIONS_LABEL">
+                <field name="catid" type="sjvmcategories" multiple="true" size="10" label="Category" description="Category"/>
+            </fieldset>
+        </fields>
+    </config>
+</extension>

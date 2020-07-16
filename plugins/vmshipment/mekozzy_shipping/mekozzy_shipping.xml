@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.9.10" type="plugin" group="vmshipment" method="upgrade">
+    <name>PLG_VMSHIPMENT_SHIPPING_MEKOZZY</name>
+    <version>1.0</version>
+    <creationDate>June 2020</creationDate>
+    <author>Phuc.pham developer</author>
+    <authorEmail>email@mekozzy.com</authorEmail>
+    <authorUrl>www.mekozzy.com</authorUrl>
+    <copyright>(C) 2020 Mekozzy.com</copyright>
+    <license>GNU/GPL</license>
+    <description>PLG_VMSHIPMENT_SHIPPING_MEKOZZY_DESC</description>
+    <files>
+        <filename plugin="mekozzy_shipping">mekozzy_shipping.php</filename>
+        <folder>language</folder>
+    </files>
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.plg_vmshipment_mekozzy_shipping.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_vmshipment_mekozzy_shipping.sys.ini</language>
+        <language tag="vi-VN">vi-VN/vi-VN.plg_vmshipment_mekozzy_shipping.ini</language>
+        <language tag="vi-VN">vi-VN/vi-VN.plg_vmshipment_mekozzy_shipping.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="account" label="PLG_VMSHIPMENT_SHIPPING_ACCOUNT">
+                <field
+                        name="authorization"
+                        type="text"
+                        default=""
+                        label="PLG_VMSHIPMENT_SHIPPING_AUTHORIZATION"
+                />
+                <field
+                        name="productionurl"
+                        type="text"
+                        default=""
+                        label="PLG_VMSHIPMENT_SHIPPING_PRODUCTIONURL"
+                />
+            </fieldset>
+        </fields>
+    </config>
+    <vmconfig>
+        <fields name="params">
+            <fieldset name="restrictions">
+                <field name="authorization" type="text" size="10" default=""
+                       label="VMSHIPMENT_WEIGHT_COUNTRIES_NBPRODUCTS_START"
+                       description="VMSHIPMENT_WEIGHT_COUNTRIES_NBPRODUCTS_START_DESC"/>
+                <field name="productionurl" type="text" size="10" default=""
+                       label="VMSHIPMENT_WEIGHT_COUNTRIES_NBPRODUCTS_STOP"
+                       description="VMSHIPMENT_WEIGHT_COUNTRIES_NBPRODUCTS_STOP_DESC"/>
+            </fieldset>
+        </fields>
+    </vmconfig>
+</extension>

@@ -1,0 +1,71 @@
+.main-image a{
+    display: block;
+}
+
+.quickview-pretext {
+	margin: 10px 0px;
+	font-size: 15px;
+}
+
+.quickview-posttext {
+	margin: 10px 0px;
+	font-size: 15px;
+}
+
+.sj_quickview_handler {
+	background: url(../images/view.png) no-repeat scroll center center #fff;
+	border: 0 none;
+	color: #FFFFFF;
+	font-size: 13px;
+	width:50px;
+	height: 50px;
+	border-radius: 50%;
+	font-weight: normal;
+	line-height: 48px;
+	text-align: center;
+	text-transform: uppercase;
+	vertical-align: middle;
+	white-space: nowrap;
+	margin: 0;
+	padding: 0;
+}
+.sj_quickview_handler i:before{content:'';}
+.sj_quickview_handler:hover,
+.sj_quickview_handler:focus {
+	background-color: #ffd200;		
+	cursor: pointer;
+}
+
+.sj_quickview_handler:focus {
+	outline: none;
+}
+
+.fancybox-lock .zoomContainer {
+	-webkit-transform: none !important;
+}
+
+.fancybox-lock .zoomContainer .zoomLens,
+.fancybox-lock .zoomContainer .zoomWindow {
+	z-index: 8021 !important;
+}
+
+.quickview-main .product-image-thumbs li:first-child {
+	margin-left: 0;
+}
+
+.quickview-main .product-collateral {
+	display: none;
+}
+
+.products-list li.item .f-fix .sj_quickview_handler {
+	float: left;
+}
+
+.quantity-box .quantity-input {
+	width: 50px;
+}
+
+span.addtocart-button {
+	padding-top: 0px;
+}
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0">
+  <name>COM_CONGTACVIEN</name>
+  <creationDate>10-April-2020</creationDate>
+  <author>Hau Pham</author>
+  <authorEmail>joo@ultraontop.com</authorEmail>
+  <authorUrl>jooext.com</authorUrl>
+  <copyright>GNU General Public License version 2 or later</copyright>
+  <license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+  <version>1.0</version>
+  <description>The affiliate program for VirtueMart - Multi-Vendors</description>
+  <scriptfile/>
+  <install>
+    <sql>
+      <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+    </sql>
+  </install>
+  <uninstall>
+    <sql/>
+  </uninstall>
+  <update>
+    <schemas/>
+  </update>
+  <media folder="media/com_congtacvien">
+    <filename>index.html</filename>
+    <folder>css</folder>
+    <folder>fonts</folder>
+    <folder>images</folder>
+    <folder>js</folder>
+    <folder>templates</folder>
+  </media>
+  <files folder="site">
+	<folder>controllers</folder>
+    <folder>helpers</folder>
+    <folder>language</folder>
+    <folder>models</folder>
+    <folder>views</folder>
+    <filename>congtacvien.php</filename>
+    <filename>controller.php</filename>
+  </files>
+  <administration>
+    <menu img="components/com_congtacvien/assets/images/com_congtacvien-16.png">COM_CONGTACVIEN</menu>
+    <files folder="admin">
+      <folder>assets</folder>
+      <folder>language</folder>
+      <folder>tables</folder>
+      <folder>sql</folder>
+      <filename>access.xml</filename>
+      <filename>congtacvien.php</filename>
+      <filename>config.xml</filename>
+    </files>
+  </administration>
+</extension>

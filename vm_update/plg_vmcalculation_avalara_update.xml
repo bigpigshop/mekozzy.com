@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>VirtueMart - Avatax</name>
+        <description>VirtueMart - Avatax, dynamic realtime tax calculation by Avalara</description>
+        <type>plugin</type>
+        <folder>vmcalculation</folder>
+        <element>avalara</element>
+        <version>3.4.2</version>
+        <client>0</client>
+        <infourl title="Use the AIO (All in once) installer to update this plugin ">https://docs.virtuemart.net/tutorials/installation-migration-upgrade/226-update-single-plugin-delivered-by-aio.html</infourl>
+
+        <downloads>
+            <!--downloadurl type="full" format="zip">http://dev.virtuemart.net/attachments/download/XXX/plg_vmpayment_paypal.3.4.2.zip</downloadurl-->
+        </downloads>
+
+        <maintainer>The VirtueMart Team</maintainer>
+        <maintainerurl>https://virtuemart.net</maintainerurl>
+        <targetplatform name="joomla" version=".*" />
+    </update>
+</updates>

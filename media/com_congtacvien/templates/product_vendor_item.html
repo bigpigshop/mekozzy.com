@@ -1,0 +1,27 @@
+
+<div ng-class="['product-vendor-item_content', {'product-selected': product.inVendorStore}]" style="background: linear-gradient(to bottom, rgba(125,125,125,0.1) 0%,rgba(125,125,125,0.1) 100%), url('/{{product.imageUrl}}') center center;background-size: cover;">
+    <div class="product-vendor-item_content_header">
+        <h2><a href="{{product.link}}" target="_blank">{{product.product_name}} <i class="fa fa-external-link text-info"></i></a></h2>
+        <div>Mã SP: {{product.product_sku}}</div>
+        <div class="category">Nhóm SP: {{product.category_name}}</div>
+        <div class="product-vendor-item_content_price">
+            Giá: <span>{{product.priceFormatted}}</span>
+        </div>
+    </div>
+
+    <div class="product-vendor-item_content_footer" style="">
+        <button class="btn btn-sm btn-warning" ng-click="removeFromToList(product.virtuemart_product_id)" title="Xóa sản phẩm ra khỏi danh sách của bạn"><i class="fa fa-remove"></i></button>
+        <button ng-if="product.published" class="btn btn-sm btn-success" ng-click="setStateItem(product.virtuemart_product_id, 0)" title="Ẩn sản phẩm trong gian hàng của bạn"><i class="fa fa-eye"></i></button>
+        <button ng-if="!product.published" class="btn btn-sm btn-default" ng-click="setStateItem(product.virtuemart_product_id, 1)" title="Hiện sản phẩm trong gian hàng của bạn"><i class="fa fa-eye-slash"></i></button>
+
+        <button popover-class="product-vendor-item_content_popup" ng-show="product.product_desc"
+                popover-trigger="'mouseenter'"
+                uib-popover="{{product.product_desc}}"
+                popover-title="{{product.product_name}}" type="button"
+                class="btn btn-secondary btn-sm"><i class="fa fa-info-circle"></i>
+        </button>
+
+        <button class="btn btn-sm btn-success pull-right" ng-click="editItem(product.virtuemart_product_id)" title="Chỉnh sửa sản phẩm"><i class="fa fa-pencil"></i></button>
+
+    </div>
+</div>

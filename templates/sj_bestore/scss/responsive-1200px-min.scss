@@ -1,0 +1,144 @@
+@media (min-width: 992px) and (max-width: 1199px) {
+    .hidden-md{display:none!important;}
+	body.site{
+	    &.home-layout1{
+			.sp-module.all-categories .sj-flat-menu{display: block;}
+	    }
+        #sp-main-body{
+            .row{
+                display:block;
+            }
+        }
+        #sp-bottom1,
+        #sp-bottom2{
+            margin-bottom:40px;
+        }
+        #sp-bottom .row{
+            display:block;
+            #sp-bottom1,
+            #sp-bottom2{
+                float:left;
+                width: 50%;
+            } 
+            #sp-bottom3{float:left;max-width: 16.666667%;}  
+            #sp-bottom4{float:left;max-width: 25%;}         
+        }
+        #sp-footer .row{
+            display:block;
+            #sp-footer1{
+                float:left;
+                width: 58.333333%;
+                max-width: 58.333333%;
+            }
+            #sp-footer2{
+                float:left;
+                width: 41.666667%;
+                max-width:41.666667%;
+            }
+        }
+        
+        #sp-right.col-md-3{
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+        #sp-left.col-md-3{
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+        #sp-component.col-md-9{
+            flex: 0 0 75%;
+            max-width: 75%;
+        }
+        #sp-component.col-lg-12{
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+        .login{
+            .row .col-md-4{
+                margin:auto;float:none;
+            }
+        }  
+        #sp-header .sj-search-pro-wrapper .input-group .form-control{width:80%;}  
+        .block-cart .sj-minicart-pro .mc-wrap .mc-header .mc-totalprice strong{font-size:10px;}   
+        .sj-vm-filter .ft-content-color .ft-option{margin:0;} 
+	}
+    .sp-module.all-categories .sj-flat-menu li:nth-child(9){display:none;}
+    body.site #sp-position-9 div.socials-footer ul li:nth-child(5){display:none;}
+    body.ltr .sp-megamenu-parent .sp-dropdown.sp-dropdown-main.sp-menu-right{left:-72px;}
+	#offcanvas-toggler{display:none;}
+	#sp-header .sj-search-pro-wrapper{width: 466px;}
+	#sp-position-9 .acymailing_module table.acymailing_form td.acyfield_email{width: 268px;}
+	#sp-top-bar{
+        .row{display:block;}
+    }
+    #sp-right .filter-vm .sj-vm-filter .ft-wrap .ft-group.ft-group-color .ft-select, #sp-left .filter-vm .sj-vm-filter .ft-wrap .ft-group.ft-group-color .ft-select{padding:20px 0;}
+    
+	#sp-header{
+		.row{
+			display:block;
+			#sp-logo{width: 25%;}
+			#sp-user1{width: 50%;}
+			#sp-user2{width: 25%;}
+		}
+	}
+	#sp-main-menu{
+        .row{display:block;}
+        #sp-user3{
+            width:41.666667%;
+        }
+        #sp-menu{
+            width:58.333333%;
+        }
+    }
+    #sp-slideshow{
+    	.row{display:block;}
+        #sp-user4{
+            width:25%;
+        }
+        #sp-slider{
+            width:75%;
+        }
+    }
+    .block-text2 .row {
+        display:block;
+        > div{
+            background-image:none;
+            width: 25%;
+        }
+    }
+	.block_banner{
+        .row{
+            display:block;
+            >div{
+                width: 33.333333%;
+            }
+        }
+    }
+    .home1_categories{
+        .row{
+            display:block;
+            >div{
+                max-width:25%;
+                width: 25%;
+            }
+        }
+    } 
+    .fancybox-wrap{
+        .fancybox-inner{
+            .productdetails{
+                .row{
+                    display:block;
+                }
+            }
+        }
+    }
+	body.rtl {
+		#sp-footer #sp-footer1 .sp-copyright{text-align:right;}
+        #sp-header .sj-search-pro-wrapper{float:right;width:415px;}
+        #sp-main-menu #sp-user3,#sp-main-menu #sp-menu{float:right;} 
+        #sp-header .sj-search-pro-wrapper .select_category select{padding: 0 10px 0 0px;}
+	}
+}
+body.rtl {
+    .col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto{float:right;}    
+}
