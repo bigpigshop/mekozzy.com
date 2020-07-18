@@ -37,7 +37,7 @@
 
 ?>
 <div class="col-sm-12">
-	<div class="iq-card position-relative inner-page-bg bg-warning" style="height: 100px;">
+	<div class="iq-card position-relative inner-page-bg bg-warning" style="height: 100px;margin-top: 20px;">
 		<div class="inner-page-title">
 			<h3 class="text-white">Danh Muc</h3>
 			<p class="text-white">Mekozzy.com</p>

@@ -14,7 +14,7 @@ Thành lập từ tháng 6/2020 mekozzy  hiện đang là trang thương mại �
 	public $access = '1';
 	public $cache_handler = 'file';
 	public $cachetime = '15';
-	public $caching = '0';
+	public $caching = '1';
 	public $captcha = '0';
 	public $cookie_domain = '';
 	public $cookie_path = '';
