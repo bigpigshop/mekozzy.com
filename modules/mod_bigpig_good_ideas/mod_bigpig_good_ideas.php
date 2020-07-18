@@ -13,6 +13,8 @@
 	$cacheparams->methodparams = $params;
 	$cacheparams->modeparams = $cacheid;
 	$list = JModuleHelper::moduleCache($module, $params, $cacheparams);
+	$session = JFactory::getSession();
+	$session->set('mod_bigpig_good_ideas', $list);
 
 	require JModuleHelper::getLayoutPath('mod_bigpig_good_ideas', 'defaultbigpig');?>
 

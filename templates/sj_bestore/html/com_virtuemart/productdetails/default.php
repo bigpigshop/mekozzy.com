@@ -190,43 +190,7 @@ jQuery(document).ready(function() { // GALT: Start listening for dynamic content
 
 			</div>
 			<div class="col-lg-4 col-md-8 col-sm-12 col-xs-12 clear_xs">
-				<div class="profile-header-image">
-					<div class="cover-container">
-						<img src="images/page-img/profile-bg7.jpg" alt="profile-bg" class="rounded img-fluid w-100">
-					</div>
-					<div class="profile-info p-4">
-						<div class="user-detail">
-							<div class="d-flex flex-wrap justify-content-between align-items-start">
-								<div class="profile-detail">
-									<div class="profile-img">
-										<img src="images/noimages.png" alt="profile-img" class="avatar-130 img-fluid">
-									</div>
-									<div class="user-data-block">
-										<?php
-											$vendorModel = new VirtueMartModelVendor();
-											$vendor = $vendorModel->getVendor($this->product->virtuemart_vendor_id);
-											require_once JPATH_ROOT . "/components/com_congtacvien/helpers/route.php";
-											$link = CTVHelperRoute::getVendorShop($this->product->virtuemart_vendor_id);
-											$text = vmText::_('COM_VIRTUEMART_VENDOR_FORM_INFO_LBL');
-											
-											echo '<span class="bold">' . vmText::_('COM_VIRTUEMART_PRODUCT_DETAILS_VENDOR_LBL') . '</span>';
-										?>
-										<a class=""
-										   href="<?php echo $link ?>"><?php echo $vendor->vendor_store_name ?></a><br/>
-										<a class=""
-										   href="<?php echo $link ?>"><?php echo $vendor->vendor_phone ?></a><br/>
-										<a class=""
-										   href="<?php echo $link ?>"><?php echo $vendor->customtitle ?></a><br/>
-									</div>
-								</div>
-								<a class="btn btn-primary"
-								   href="<?php echo $link ?>"><?php echo $vendor->vendor_store_name ?></a><br/>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
+				<?php echo shopFunctionsF::renderVmSubLayout('vendor_store', array('product' => $this->product, 'currency' => $this->currency)); ?>
 			</div>
 		</div>
 	</div>
@@ -266,6 +230,9 @@ jQuery(document).ready(function() { // GALT: Start listening for dynamic content
 							<div class="product-description">
 								<?php /** @todo Test if content plugins modify the product description */ ?>
 								<?php //echo $this->product->product_desc; ?>
+								
+								<?php echo shopFunctionsF::renderVmSubLayout('other_promotions', array('product' => $this->product, 'currency' => $this->currency)); ?>
+								
                                 <?php echo shopFunctionsF::renderVmSubLayout('product_description', array('product' => $this->product, 'currency' => $this->currency)); ?>
 							</div>
 							<?php
@@ -334,7 +301,6 @@ jQuery(document).ready(function() { // GALT: Start listening for dynamic content
 		echo $this->product->event->beforeDisplayContent; ?>
 	<div class="bottom-single-product theme-clearfix">
 		<?php
-			echo shopFunctionsF::renderVmSubLayout('other_promotions', array('product' => $this->product, 'currency' => $this->currency));
 			echo shopFunctionsF::renderVmSubLayout('related_product_category', array('product' => $this->product, 'currency' => $this->currency));
 			echo shopFunctionsF::renderVmSubLayout('related_products', array('product' => $this->product, 'position' => 'related_products', 'class' => 'product-related-products', 'customTitle' => true));
 			echo shopFunctionsF::renderVmSubLayout('related_categories', array('product' => $this->product, 'position' => 'related_categories', 'class' => 'product-related-categories'));

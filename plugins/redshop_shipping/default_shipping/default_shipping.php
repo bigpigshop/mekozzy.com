@@ -129,7 +129,7 @@
 			$data->shipments->content = "shipping Cod";
 			$data->shipments->total_parcel = count($parcels);
 			$data->shipments->total_amount = $i;
-			$data->shipments->chargeable_weight = $chargeable_weight;
+			$data->shipments->chargeable_weight = (int) $chargeable_weight;
 			$data->shipments->description = "";
 			$data->shipments->parcels = $parcels;
 			
@@ -162,6 +162,72 @@
 			echo $output;
 		}
 		
+		public function onAjaxGetFeeProductDetail()
+		{
+			$country = !empty($_POST['country']) ? $_POST['country'] : 0;
+			$province = !empty($_POST['province']) ? $_POST['province'] : 0;
+			$ward = !empty($_POST['ward']) ? $_POST['ward'] : 0;
+			$idProduct = !empty($_POST['idproduct']) ? $_POST['idproduct'] : '';
+			$chargeableweight = 1000;
+			
+			if (!class_exists('VmConfig')) {
+				require_once(JPATH_SITE . '/administrator/components/com_virtuemart/helpers/config.php');
+				VmConfig::loadConfig();
+			}
+			if (!class_exists('VirtueMartCart')) {
+				require_once(JPATH_SITE . '/components/com_virtuemart/helpers/cart.php');
+			}
+			
+			$productModel = VmModel::getModel('Product');
+			$product = $productModel->getProduct($idProduct);
+			$chargeableweight = $product->product_weight;
+			
+			$pickup_id = 148703;
+			
+			$data = new stdClass();
+			$data->ship_from->country = $country;
+			$data->ship_from->pickup_id = $pickup_id;
+			
+			$data->ship_to->contact_name = "admin";
+			$data->ship_to->address = "system";
+			$data->ship_to->phone = "0938788091";
+			$data->ship_to->country = "VN";
+			$data->ship_to->province = $province;
+			$data->ship_to->district = $ward;
+			
+			$data->shipments->content = "shipping Cod";
+			$data->shipments->total_parcel = 1;
+			$data->shipments->total_amount = 1;
+			$data->shipments->chargeable_weight = (int) $chargeableweight;
+			
+			$data->config->order_type = "normal";
+			$data->config->document = "Y";
+			$data->config->currency = "VND";
+			
+			$data->payment->fee_paid_by = "receiver";
+			$data->payment->tax_paid_by = "receiver";
+			$data->payment->cod_amount = $product->allPrices[0]['product_override_price'];
+			
+			$body = json_encode($data);
+			
+			$ch = curl_init();
+			
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			curl_setopt($ch, CURLOPT_URL, "http://s.boxme.asia/api/v1/courier/pricing/calculate");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Content-Type: application/json',
+				'Authorization: Token 424dce789c54156334f53818d2c86dc4daf6d9089672a5315ba2ad2a4e33ad88',
+			));
+			$output = curl_exec($ch);
+			
+			curl_close($ch);
+			
+			echo $output;
+		}
+		
 		public function onAjaxGetFee()
 		{
 			$country = !empty($_POST['country']) ? $_POST['country'] : 0;
@@ -171,7 +237,7 @@
 			$address = !empty($_POST['address']) ? $_POST['address'] : '';
 			$email = !empty($_POST['email']) ? $_POST['email'] : '';
 			$phone = !empty($_POST['phone']) ? $_POST['phone'] : '';
-			$chargeable_weight = "1";
+			$chargeable_weight = 0;
 			
 			if (!class_exists('VmConfig')) {
 				require_once(JPATH_SITE . '/administrator/components/com_virtuemart/helpers/config.php');
@@ -183,8 +249,14 @@
 			$cart = VirtueMartCart::getCart(false);
 			$data = $cart->prepareAjaxData();
 			
-			foreach ($cart->products as $product) {
-				$chargeable_weight += $product->product_weight;
+			foreach ($cart->products as $product)
+			{
+				$chargeable_weight += $product->product_weight * $cart->productsQuantity[$product->virtuemart_product_id];
+			}
+			
+			if($chargeable_weight== 0)
+			{
+				$chargeable_weight = 1000;
 			}
 			
 			$pickup_id = 148703;
@@ -203,7 +275,7 @@
 			$data->shipments->content = "shipping Cod";
 			$data->shipments->total_parcel = 1;
 			$data->shipments->total_amount = 1;
-			$data->shipments->chargeable_weight = $chargeable_weight;
+			$data->shipments->chargeable_weight = (int)$chargeable_weight;
 			
 			$data->config->order_type = "normal";
 			$data->config->document = "Y";

@@ -169,16 +169,23 @@ $orderInfo->color->contentTxtFont = $fontFamily[$orderInfo->color->contentTxtFon
                             if ($orderInfo->options->hideempty){
                                 $customfields = array();
                                 $selectedField = $pvalue->customProductData;
-                                foreach ($pvalue->customfields as $cf) {
-                                    if (isset($selectedField[$cf->virtuemart_custom_id]) and($cf->virtuemart_customfield_id==$selectedField[$cf->virtuemart_custom_id])){
-                                        if(!empty($cf->customfield_value)){
+                                foreach ($pvalue->customfields as $cf)
+                                {
+                                    if (isset($selectedField[$cf->virtuemart_custom_id]) and($cf->virtuemart_customfield_id==$selectedField[$cf->virtuemart_custom_id]) and ($cf->custom_title == 'coupon') )
+                                    {
+                                        if(!empty($cf->customfield_value))
+                                        {
                                             $customfields[$cf->virtuemart_custom_id] = $selectedField[$cf->virtuemart_custom_id];
                                         }
                                     }
-                                }                            
+                                }
+                                
                                 $pvalue->customProductData = $customfields;
+                              
+                                
                             }                            
-                            echo $this->customfieldsModel->CustomsFieldCartDisplay($pvalue);
+                            echo $this->customfieldsModel->CustomsFieldCartDisplay($pvalue->customProductData);
+                            
                         ?>
                     </div>
                 </li>

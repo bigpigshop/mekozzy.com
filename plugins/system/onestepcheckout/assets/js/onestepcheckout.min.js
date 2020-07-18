@@ -765,7 +765,7 @@
                                 <li class="result-total"><span class="opc-salesPrice-total">`+ jsonObject.billTotal_net+`</span></li>
                                 <li class="result-discount"><span class="opc-discountAmount-total"></span></li>
                                 <li class="result-tax"><span class="opc-taxAmount-total"></span></li>
-                                <li class="result-title">Product prices result</li>
+                                <li class="result-title">Kết quả giá sản phẩm</li>
                             </ul>
                         </div>
                         <div class="order-result">
@@ -773,23 +773,15 @@
                                 <li class="result-total"><span class="opc-salesPriceShipment"> `+ total_fee +` </span></li>
                                 <li class="result-discount"></li>
                                 <li class="result-tax"><span class="opc-shipmentTax"></span></li>
-                                <li class="result-title">Shipping Cost</li>
+                                <li class="result-title">Giá vận chuyển</li>
                             </ul>
-                        </div>
-                        <div class="order-result">
-                        <ul>
-                            <li class="result-total"><span class="opc-salesPricePayment"></span></li>
-                            <li class="result-discount"></li>
-                            <li class="result-tax"><span class="opc-paymentTax"></span></li>
-                            <li class="result-title">Payment Cost</li>
-                        </ul>
                         </div>
                         <div class="order-result">
                             <ul>
                                 <li class="result-total total"><span class="opc-billTotal">`+ jsonObject.billTotal+`</span></li>
                                 <li class="result-discount total"><span class="opc-billDiscountAmount"></span> </li>
                                 <li class="result-tax total"><span class="opc-billTaxAmount">0 ₫</span></li>
-                                <li class="result-title total">Total</li>              
+                                <li class="result-title total">Tổng cộng đơn hàng</li>              
                             </ul>
                         </div>
 

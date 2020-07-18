@@ -57,3 +57,10 @@
 		}
 	?>
 </div>
+
+<style>
+    .productdetails .content_product_detail .product-price .PricesalesPrice {
+        font-size: 50px;
+        padding-top: 20px;
+    }
+</style>

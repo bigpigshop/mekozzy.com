@@ -138,6 +138,7 @@
 		$document->addScript('templates/sj_bestore/js/slick.min.js');
 		$document->addScript('templates/sj_bestore/js/wow.min.js');
 		$document->addScript('templates/sj_bestore/js/lottie.js');
+		$document->addScript('media\jui\js\chosen.jquery.js');
 		
 		//Before Head
 		if ($before_head = $this->params->get('before_head')) {
