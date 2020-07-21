@@ -14,20 +14,23 @@
 							foreach ($item->img as $ite) {
 								if (is_file($ite['src'])) {
 									?>
+									<a href="<?php echo $item->link ?>" target="_blank">
 									<div class="card card-pin good-ideas">
 										<img class="card-img"
 											 src="<?php echo $ite['src'] ?>"
 											 alt="Card image">
 										<div class="overlay">
 											<h2 class="card-title title"><?php echo $item->title ?></h2>
-											<div class="more">
-												<a href="<?php echo $item->link ?>" target="_blank">
+											<!-- <div class="more">
+												<a href="<?php// echo $item->link ?>" target="_blank">
 													<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> chi
 													tiết bài viết </a>
-											</div>
+											</div> -->
 											<p class="card-title title"><?php echo $item->introtext ?></p>
 										</div>
+									
 									</div>
+									</a>
 									<?php
 								}
 							}

@@ -24,7 +24,7 @@
 //$start = microtime(true);
 
 
-defined('_JEXEC') or die('Restricted access');
+define('_JEXEC', 1);
 
 $DIR = dirname(dirname(dirname(dirname(__FILE__))));
 

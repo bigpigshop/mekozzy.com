@@ -3,9 +3,9 @@
  * JCH Optimize - Joomla! plugin to aggregate and minify external resources for
  * optmized downloads
  *
- * @author    Samuel Marshall <sdmarshall73@gmail.com>
+ * @author Samuel Marshall <sdmarshall73@gmail.com>
  * @copyright Copyright (c) 2014 Samuel Marshall
- * @license   GNU/GPLv3, See LICENSE file
+ * @license GNU/GPLv3, See LICENSE file
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,70 +19,77 @@
  *
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
-
-namespace JchOptimize\Platform;
-
 defined('_JEXEC') or die('Restricted access');
 
-use JchOptimize\Core\Exception;
-use JchOptimize\Core\FileRetriever;
-use JchOptimize\Core\Logger;
-use JchOptimize\Interfaces\HtmlInterface;
-
-class Html implements HtmlInterface
+class JchPlatformHtml implements JchInterfaceHtml
 {
-	protected $params;
+        protected $params;
+        
+        /**
+         * 
+         * @param type $params
+         */
+        public function __construct($params)
+        {
+                $this->params = $params;
+        }
+        
+        /**
+         * 
+         * @return type
+         * @throws RuntimeException
+         * @throws Exception
+         */
+        public function getOriginalHtml()
+        {
+                JCH_DEBUG ? JchPlatformProfiler::mark('beforeGetHtml') : null;
 
-	/**
-	 *
-	 * @param   Settings  $params
-	 */
-	public function __construct($params)
-	{
-		$this->params = $params;
-	}
+                try
+                {
+                        $oFileRetriever = JchOptimizeFileRetriever::getInstance();
 
-	/**
-	 * Returns HTML of the front page
-	 *
-	 * @return string
-	 */
-	public function getOriginalHtml()
-	{
-		JCH_DEBUG ? Profiler::mark('beforeGetHtml') : null;
+                        $response = $oFileRetriever->getFileContents($this->getSiteUrl());
 
-		try
-		{
-			$oFileRetriever = FileRetriever::getInstance();
+                        if ($oFileRetriever->response_code != 200)
+                        {
+                                throw new Exception('Failed fetching front end HTML with response code ' . $oFileRetriever->response_code);
+                        }
 
-			$response = $oFileRetriever->getFileContents($this->getSiteUrl());
+                        JCH_DEBUG ? JchPlatformProfiler::mark('afterGetHtml') : null;
 
-			if ($oFileRetriever->response_code != 200)
-			{
-				throw new Exception('Failed fetching front end HTML with response code ' . $oFileRetriever->response_code);
-			}
+                        return $response;
+                }
+                catch (Exception $e)
+                {
+                        JchOptimizeLogger::log($this->getSiteUrl() . ': ' . $e->getMessage(), $this->params);
 
-			JCH_DEBUG ? Profiler::mark('afterGetHtml') : null;
+                        JCH_DEBUG ? JchPlatformProfiler::mark('afterGetHtml') : null;
 
-			return $response;
-		}
-		catch (Exception $e)
-		{
-			Logger::log($this->getSiteUrl() . ': ' . $e->getMessage(), $this->params);
+                        throw new RuntimeException(JText::_('JCH_REFRESH_FRONT_END'));
+                }
+        }
+        
+        /**
+         * 
+         * @return string
+         */
+        protected function getSiteUrl()
+        {
+                $sSiteUrl = JUri::root() . '?jchbackend=2';
 
-			JCH_DEBUG ? Profiler::mark('afterGetHtml') : null;
+                return $sSiteUrl;
+        }
+        
+        /**
+         * 
+         * @return type
+         */
+        public static function getHomePageLink()
+        {
+                $oMenu            = JFactory::getApplication()->getMenu('site');
+                $oDefaultMenuItem = $oMenu->getDefault();
 
-			throw new \RuntimeException('Try reloading the front page to populate the Exclude options');
-		}
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	protected function getSiteUrl()
-	{
-		return \JUri::root() . '?jchbackend=2';
-	}
+                return $oDefaultMenuItem->id;
+        }
 
 }

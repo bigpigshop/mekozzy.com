@@ -1,34 +1,14 @@
 <?php
 
-/**
- * JCH Optimize - Joomla! plugin to aggregate and minify external resources for
- * optmized downloads
- * @author Samuel Marshall <sdmarshall73@gmail.com>
- * @copyright Copyright (c) 2010 Samuel Marshall
- * @license GNU/GPLv3, See LICENSE file
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
- */
-
-namespace JchOptimize\LIBS;
-
-defined('_JEXEC') or die('Restricted access');
+namespace JchOptimize;
 
 use CURLFile;
 use curl_init;
 use curl_exec;
 use RuntimeException;
-use JchOptimize\Core\FileRetriever;
-use JchOptimize\Core\Json;
+use Exception;
+
+//use JchOptimizeFileRetriever;
 
 class ImageOptimizer
 {
@@ -49,7 +29,7 @@ class ImageOptimizer
         {
                 if (empty($opts['files'][0]))
                 {
-                        throw new \Exception('File parameter was not provided', 500);
+                        throw new Exception('File parameter was not provided', 500);
                 }
 
                 //if (!files_exists($opts['files']))
@@ -75,24 +55,21 @@ class ImageOptimizer
 
 		$data = array_merge($files, array( "data" => json_encode(array_merge($this->auth, $opts))));
 
-	        return self::request($data, "https://api.jch-optimize.net/");
+                $response = self::request($data, "https://api.jch-optimize.net/");
+
+                return $response;
         }
 
         private function request($data, $url)
         {
-		ini_set('upload_max_filesize', '50M');
-		ini_set('post_max_size', '50M');
-		ini_set('max_input_time', 300);
-		ini_set('max_execution_time', 300);
-
 		$aHeaders = array('Content-Type' => 'multipart/form-data');
-		$oFileRetriever = FileRetriever::getInstance(array('curl'));
+		$oFileRetriever = \JchOptimizeFileRetriever::getInstance(array('curl'));
 
 		$response = $oFileRetriever->getFileContents($url, $data, $aHeaders, '', 30);
 
 		if($oFileRetriever->response_code === 0 && $oFileRetriever->response_error !== '')
 		{
-			return new Json(new \Exception($oFileRetriever->response_error), 500);
+			return new \JchOptimizeJson(new Exception($oFileRetriever->response_error), 500);
 		}
 
 		return json_decode($response);
@@ -120,8 +97,8 @@ class ImageOptimizer
 
                 if ($error > 0)
                 {
-                        $curl_error = new \RuntimeException(sprintf('cURL returned with the following error: "%s"', $message), $error);
-			$response = new Json($curl_error);
+                        $curl_error = new RuntimeException(sprintf('cURL returned with the following error: "%s"', $message), $error);
+			$response = new \JchOptimizeJson($curl_error);
                 }
 
 		return array(

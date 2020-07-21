@@ -19,25 +19,60 @@
  *
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
+defined('_JCH_EXEC') or die('Restricted access');
 
-namespace JchOptimize\Core;
-
-defined('_JEXEC') or die('Restricted access');
-
-class Exception extends \Exception
+interface JchIException
 {
+
+        /* Protected methods inherited from Exception class */
+
+        public function getMessage();                 // Exception message 
+
+        public function getCode();                    // User-defined Exception code
+
+        public function getFile();                    // Source filename
+
+        public function getLine();                    // Source line
+
+        public function getTrace();                   // An array of the backtrace()
+
+        public function getTraceAsString();           // Formated string of trace
+
+        /* Overrideable methods inherited from Exception class */
+
+        public function __toString();                 // formated string for display
+
+        public function __construct($message = null, $code = 0);
+}
+
+abstract class JchCustomException extends Exception implements JchIException
+{
+
+        protected $message = 'Unknown exception';     // Exception message
+        private $string;                            // Unknown
+        protected $code    = 0;                       // User-defined exception code
+        protected $file;                              // Source filename of exception
+        protected $line;                              // Source line of exception
+        private $trace;                             // Unknown
 
         public function __construct($message = null, $code = 0)
         {
                 if (!$message)
                 {
-			$this->message = 'Unknown Exception';
+                        throw new $this('Unknown ' . get_class($this));
                 }
-
-		$error_message = get_class($this) . " '{$message}' in {$this->getFile()}({$this->getLine()})\n"
-		       . "{$this->getTraceAsString()}";	
-
-                parent::__construct($error_message, $code);
+                parent::__construct($message, $code);
         }
+
+        public function __toString()
+        {
+                return get_class($this) . " '{$this->message}' in {$this->file}({$this->line})\n"
+                        . "{$this->getTraceAsString()}";
+        }
+
 }
 
+class JchOptimizeException extends JchCustomException
+{
+        
+}

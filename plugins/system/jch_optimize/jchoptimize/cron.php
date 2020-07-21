@@ -19,34 +19,25 @@
  *
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
-namespace JchOptimize\Core;
+defined('_JCH_EXEC') or die('Restricted access');
 
-defined('_JEXEC') or die('Restricted access');
-
-use JchOptimize\Platform\Profiler;
-use JchOptimize\Platform\Cache;
-use JchOptimize\Platform\Settings;
-use JchOptimize\Platform\Utility;
-
-class Cron
+class JchOptimizeCron
 {
         public $params;
         
         /**
          * 
-         * @param Settings $params
+         * @param type $params
          */
         public function __construct($params)
         {
                 $this->params = $params;
         }
-
-	/**
-	 *
-	 * @param Parser $oParser
-	 *
-	 * @return string
-	 */
+        
+        /**
+         * 
+         * @return string
+         */
         public function runCronTasks($oParser)
         {
                 //$this->getAdminObject($oParser);
@@ -54,25 +45,25 @@ class Cron
                 
                 return 'CRON';
         }
-
-	/**
-	 * @param Parser $oParser
-	 */
+        
+        /**
+         * 
+         */
         public function getAdminObject($oParser)
         {
-                JCH_DEBUG ? Profiler::start('GetAdminObject') : null;
+                JCH_DEBUG ? JchPlatformProfiler::start('GetAdminObject') : null;
                 
                 try
                 {
-                        $oAdmin = new Admin($this->params);
-                        $oAdmin->getAdminLinks($oParser->getOriginalHtml(), Utility::menuId());
+                        $oAdmin = new JchOptimizeAdmin($this->params);
+                        $oAdmin->getAdminLinks($oParser->getOriginalHtml(), JchPlatformUtility::menuId());
                 }
                 catch (Exception $ex)
                 {
-                        Logger::log($ex->getMessage(), $this->params);
+                        JchOptimizeLogger::log($ex->getMessage(), $this->params);
                 }
                 
-                JCH_DEBUG ? Profiler::stop('GetAdminObject', true) : null;
+                JCH_DEBUG ? JchPlatformProfiler::stop('GetAdminObject', true) : null;
         }
         
         /**
@@ -80,12 +71,12 @@ class Cron
          */
         public function garbageCron()
         {
-                JCH_DEBUG ? Profiler::start('GarbageCron') : null;
+                JCH_DEBUG ? JchPlatformProfiler::start('GarbageCron') : null;
                 
-               // $url = Paths::ajaxUrl('garbagecron');
-               // Helper::postAsync($url, $this->params, array('async' => '1'));
-		Cache::gc();
+               // $url = JchPlatformPaths::ajaxUrl('garbagecron');
+               // JchOptimizeHelper::postAsync($url, $this->params, array('async' => '1'));
+		JchPlatformCache::gc();
 
-                JCH_DEBUG ? Profiler::stop('GarbageCron', true) : null;
+                JCH_DEBUG ? JchPlatformProfiler::stop('GarbageCron', true) : null;
         }
 }

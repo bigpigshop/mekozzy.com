@@ -23,15 +23,9 @@
  */
 //$start = microtime(true);
 
-if(!defined('_JEXEC'))
-{
-	define('_JEXEC', 1);
-}
-
-defined('_JEXEC') or die('Restricted access');
 
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/plugins/system/jch_optimize/bootstrap.php';
 
-jchoptimize_class_autoload('JchOptimize\\Core\\Output');
+loadJchOptimizeClass('JchOptimizeOutput');
 
-JchOptimize\Core\Output::getCombinedFile();
+JchOptimizeOutput::getCombinedFile();

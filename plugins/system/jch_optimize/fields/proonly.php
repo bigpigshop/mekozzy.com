@@ -18,7 +18,6 @@
  *
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
-
 defined('_JEXEC') or die;
 
 class JFormFieldProonly extends JFormField {

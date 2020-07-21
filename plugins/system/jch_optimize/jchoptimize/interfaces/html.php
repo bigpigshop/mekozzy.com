@@ -20,16 +20,10 @@
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
 
-namespace JchOptimize\Interfaces;
 
-defined('_JEXEC') or die('Restricted access');
+defined('_JCH_EXEC') or die('Restricted access');
 
-interface HTMLInterface
+interface JchInterfaceHTML
 {
-	/**
-	 * Returns HTML of the front page
-	 *
-	 * @return string
-	 */
         public function getOriginalHtml();
 }

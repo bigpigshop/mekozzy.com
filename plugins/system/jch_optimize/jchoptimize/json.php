@@ -1,11 +1,11 @@
 <?php
 /**
  * JCH Optimize - Aggregate and minify external resources for optmized downloads
- *
- * @author    Samuel Marshall <sdmarshall73@gmail.com>
+ * 
+ * @author Samuel Marshall <sdmarshall73@gmail.com>
  * @copyright Copyright (c) 2010 Samuel Marshall
- * @license   GNU/GPLv3, See LICENSE file
- *
+ * @license GNU/GPLv3, See LICENSE file
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -19,15 +19,13 @@
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
 
-namespace JchOptimize\Core;
-
 // No direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JCH_EXEC') or die('Restricted access');
 
 /**
- *
+ * 
  */
-class Json
+class JchOptimizeJson
 {
 	/**
 	 * Determines whether the request was successful
@@ -44,8 +42,8 @@ class Json
 	public $message = '';
 
 	/**
-	 * The error code
-	 *
+         * The error code
+         * 
 	 */
 	public $code = 0;
 
@@ -59,25 +57,25 @@ class Json
 	/**
 	 * Constructor
 	 *
-	 * @param   mixed   $response  The Response data
-	 * @param   string  $message   The response message
-	 *
+	 * @param   mixed    $response        The Response data
+	 * @param   string   $message         The response message
+         * 
 	 */
 	public function __construct($response = null, $message = '')
 	{
 		$this->message = $message;
 
 		// Check if we are dealing with an error
-		if ($response instanceof \Exception)
+		if ($response instanceof Exception)
 		{
 			// Prepare the error response
 			$this->success = false;
 			$this->message = $response->getMessage();
-			$this->code    = $response->getCode();
+                        $this->code = $response->getCode();
 		}
 		else
 		{
-			$this->data = $response;
+			$this->data    = $response;
 		}
 	}
 
@@ -88,16 +86,8 @@ class Json
 	 */
 	public function __toString()
 	{
-		@header('Content-Type: application/json; charset=utf-8');
-
-		if (version_compare(PHP_VERSION, '7.2', '>='))
-		{
-			return json_encode($this, JSON_INVALID_UTF8_SUBSTITUTE);
-		}
-		else
-		{
-			return json_encode($this);
-		}
-
+                @header( 'Content-Type: application/json; charset=utf-8' );
+                
+		return json_encode($this);
 	}
 }

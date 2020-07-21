@@ -247,7 +247,8 @@
 <div class="row xemthem">
     <a class="d-block nav-item loadmore"
 		<?php
-			$caturl = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $category->virtuemart_category_id);
+            // $caturl = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $category->virtuemart_category_id);
+            $caturl = JRoute::_('index.php?option=com_content&view=article&id=141&layout=categoriesproduct&tmpl=component&idcategory='. $catid[0] );
 		?>
        href="<?php echo $caturl ?>"
        target="_blank">Xem Them </a>

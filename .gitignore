@@ -2,7 +2,6 @@
 *.jpa
 
 # Avoid tracking images
-images/*
 Thumbs.db
 
 # Backups
@@ -33,10 +32,6 @@ tmp/*
 bower_components
 node_modules
 
-# Ignore template css so it's generated for each enviroment
-#templates/redcomponent/css/style.css
-#templates/mobapp/css/style.css
-
 # Avoid tracking htaccess to avoid local folder protection
 .htaccess
 
@@ -44,30 +39,6 @@ node_modules
 !.gitignore
 !index.html
 !index.php
-
-#components/com_redshop/assets/images/product/*
-#components/com_redshop/assets/images/category/*
-#components/com_redshop/assets/images/tmp/*
-#components/com_redshop/assets/images/*/thumb/*
-#templates/*/css/style.css
-#templates/*/css/style-responsive.css
-#templates/redcomponent/css/joomla3-generic.css
-#templates/redcomponent/css/joomla3-generic-responsive.css
-
-#templates/*/js/template.js
-
-#media/com_reditem/images/customfield/*/thumbnail_*
-#media/com_reditem/images/category/*/large_*
-#media/com_reditem/images/category/*/medium_*
-#media/com_reditem/images/category/*/small_*
-#media/com_reditem/images/categoryfield/*/thumbnail_*
-#media/com_reditem/files/customfield/temporary/*
-
-#media/com_redshop/images/category/*/thumb
-#media/com_redshop/images/product/*/thumb
-
-# components/com_redshop/assets/xmlfile/export/*
-# components/com_rsticketspro/assets/files/*
 
 media/plg_jchoptimize/cache/*
 
@@ -83,6 +54,6 @@ sftp-config.json
 import-service/*
 downloads/*
 #configuration.php
-#templates/redcomponent/css/style.css
+
 
 .idea/*

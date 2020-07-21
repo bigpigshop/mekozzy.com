@@ -18,27 +18,17 @@
  *
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
-
-namespace JchOptimize\Platform;
-
-use JchOptimize\Core\Logger;
-use JchOptimize\Interfaces\PluginInterface;
-use Joomla\Registry\Registry;
-use Joomla\CMS\Factory;
-use Joomla\CMS\MVC\Controller\BaseController;
-use Joomla\CMS\MVC\Factory\MVCFactory;
-
 defined('_JEXEC') or die('Restricted access');
 
-class Plugin implements PluginInterface
+class JchPlatformPlugin implements JchInterfacePlugin
 {
 
         protected static $plugin = null;
 
-	/**
-	 *
-	 * @return integer
-	 */
+        /**
+         * 
+         * @return type
+         */
         public static function getPluginId()
         {
                 $plugin = static::loadjch();
@@ -46,19 +36,21 @@ class Plugin implements PluginInterface
                 return $plugin->extension_id;
         }
 
-	/**
-	 *
-	 * @return mixed|null
-	 */
+        /**
+         * 
+         * @return type
+         */
         public static function getPlugin()
         {
-	        return static::loadjch();
+                $plugin = static::loadjch();
+
+                return $plugin;
         }
 
-	/**
-	 *
-	 * @return mixed|null
-	 */
+        /**
+         * 
+         * @return type
+         */
         private static function loadjch()
         {
                 if (self::$plugin !== null)
@@ -66,12 +58,12 @@ class Plugin implements PluginInterface
                         return self::$plugin;
                 }
 
-               // $cache = Cache::getCacheObject('output');
+               // $cache = JchPlatformCache::getCacheObject('output');
                // $id    = 'jchoptimizeplugincache';
 
                // if (!self::$plugin = $cache->get($id))
                // {
-                        $db    = Factory::getDbo();
+                        $db    = JFactory::getDbo();
                         $query = $db->getQuery(true)
                                 ->select('folder AS type, element AS name, params, extension_id')
                                 ->from('#__extensions')
@@ -96,10 +88,10 @@ class Plugin implements PluginInterface
                 if (is_null($params))
                 {
                         $plugin       = self::getPlugin();
-                        $pluginParams = new Registry();
+                        $pluginParams = new JRegistry();
                         $pluginParams->loadString($plugin->params);
 
-                        $params = Settings::getInstance($pluginParams);
+                        $params = JchPlatformSettings::getInstance($pluginParams);
                 }
 
                 return $params;
@@ -107,34 +99,26 @@ class Plugin implements PluginInterface
 
         /**
          * 
-         * @param Settings $params
+         * @param type $params
          */
         public static function saveSettings($params)
         {
-                $oPlugin          = Plugin::getPlugin();
+                $oPlugin          = JchPlatformPlugin::getPlugin();
                 $oPlugin->params  = $params->toArray();
                 $oPlugin->name    = 'PLG_SYSTEM_JCH_OPTIMIZE';
                 $oPlugin->element = 'jch_optimize';
 
-                $oData = new Registry($oPlugin);
+                $oData = new JRegistry($oPlugin);
                 $aData = $oData->toArray();
 
-		if (version_compare(JVERSION, '4.0', 'ge'))
-		{
-			$oController = new BaseController(array(), new MVCFactory('Joomla\\Component\\Plugins\\'));
-			$oPluginModel = $oController->getModel('Plugin');
-		}
-		else
-		{
-			$oController = new BaseController;
-			$oController->addModelPath(JPATH_ADMINISTRATOR . '/components/com_plugins/models', 'PluginsModel');
-			/** @var \PluginsModelPlugin $oPluginModel */
-			$oPluginModel = $oController->getModel('Plugin', 'PluginsModel');
-		}
+                $oController = new JControllerLegacy;
+
+                $oController->addModelPath(JPATH_ADMINISTRATOR . '/components/com_plugins/models', 'PluginsModel');
+                $oPluginModel = $oController->getModel('Plugin', 'PluginsModel');
 
                 if ($oPluginModel->save($aData) === FALSE)
                 {
-                        Logger::log(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $oPluginModel->getError()), $params);
+                        JchOptimizeLogger::log(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $oPluginModel->getError()), $params);
                 }
         }
 

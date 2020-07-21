@@ -19,11 +19,6 @@
 	$document->addScript(  'modules/mod_bigpig_category_product_detail/assets/js/bigpig.js');
 ?>
 <div class="category-view bigpig">
-    <div style="float: right" class="row xemthem">
-        <a class="d-block nav-item loadmore"
-           href="<?php echo JRoute::_('index.php?option=com_content&view=article&id=137&layout=loadmore&tmpl=component'); ?>"
-           target="_blank">Xem Them </a>
-    </div>
     <div class="clear"></div>
     <ul class="row flex">
         <?php
@@ -43,7 +38,7 @@
         <li class="item product col-3 col-md-3 col-sm-3 col-xs-3 col-lg-3 flex-item">
             <div class="item-inner clearfix">
                 <div class="item-image">
-                    <a title="<?php echo $cat->category_name; ?>" target="_blank"  href="<?php echo JRoute::_('index.php?option=com_content&view=article&id=137&layout=loadmore&tmpl=component'); ?>">
+                    <a title="<?php echo $cat->category_name; ?>" target="_blank"  href="<?php echo JRoute::_('index.php?option=com_content&view=article&id=141&layout=categoriesproduct&tmpl=component&idcategory='. $cat->virtuemart_category_id ); ?>">
                         <img src="<?php  echo is_file($json->file_url) ? $json->file_url : 'images/noimages.png'?>" alt="<?php echo $cat->category_name; ?>"> </a>
                 </div>
                 <div class="item-content">

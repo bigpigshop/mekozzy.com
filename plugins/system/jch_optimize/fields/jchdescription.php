@@ -66,7 +66,7 @@ class JFormFieldJchdescription extends JFormField
                         
                         case 'version':
                                 $header = '';
-                                $description = '<h4>(Version 6.0.1)</h4>';
+                                $description = '<h4>(Version 5.4.2)</h4>';
                                 break;
                         
                         default:

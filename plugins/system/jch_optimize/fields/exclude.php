@@ -18,16 +18,10 @@
  *
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
-
 defined('_JEXEC') or die;
 
-use JchOptimize\Platform\Plugin;
-use JchOptimize\Platform\Profiler;
-use JchOptimize\Core\Helper;
-use JchOptimize\Core\Admin;
-
 JFormHelper::loadFieldClass('Textarea');
-Plugin::getPluginParams();
+JchPlatformPlugin::getPluginParams();
 
 abstract class JchTextarea extends JFormFieldTextarea
 {
@@ -36,11 +30,11 @@ abstract class JchTextarea extends JFormFieldTextarea
 
         public function setup(SimpleXMLElement $element, $value, $group = NULL)
         {
-                JCH_DEBUG ? Profiler::mark('beforeSetup' . $this->type) : null;
+                JCH_DEBUG ? JchPlatformProfiler::mark('beforeSetup' . $this->type) : null;
 
                 $value = $this->castValue($value);
 
-                JCH_DEBUG ? Profiler::mark('afterSetup' . $this->type) : null;
+                JCH_DEBUG ? JchPlatformProfiler::mark('afterSetup' . $this->type) : null;
 
                 return parent::setup($element, $value, $group);
         }
@@ -71,7 +65,7 @@ abstract class JFormFieldExclude extends JchTextarea
         {
                 if (!is_array($value))
                 {
-                        $value = Helper::getArray($value);
+                        $value = JchOptimizeHelper::getArray($value);
                 }
 
                 return $value;
@@ -108,7 +102,7 @@ abstract class JFormFieldExclude extends JchTextarea
 
 		foreach($this->value as $excludevalue)
 		{
-			$options[$excludevalue] = Admin::{'prepare' . ucfirst($this->filegroup) . 'Values'}($excludevalue);
+			$options[$excludevalue] = JchOptimizeAdmin::{'prepare' . ucfirst($this->filegroup) . 'Values'}($excludevalue);
 ;
 		}
 

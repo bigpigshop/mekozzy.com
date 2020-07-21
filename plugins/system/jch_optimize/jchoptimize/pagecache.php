@@ -20,16 +20,11 @@
  * If LICENSE file missing, see <http://www.gnu.org/licenses/>.
  */
 
-namespace JchOptimize\Core;
 
-defined('_JEXEC') or die('Restricted access');
+defined('_JCH_EXEC') or die('Restricted access');
 
-use JchOptimize\Platform\Uri;
-use JchOptimize\Platform\Cache;
-use JchOptimize\Platform\Plugin;
-use JchOptimize\Platform\Utility;
 
-class Pagecache
+class JchOptimizePagecache
 {
 
 	/**
@@ -42,15 +37,20 @@ class Pagecache
 		{
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 			{
-				Cache::deleteCache();
+				JchPlatformCache::deleteCache();
 
 				return;
 			}
 
-			$html = Cache::getCache(self::getPageCacheId(), true);
+			$html = JchPlatformCache::getCache(self::getPageCacheId(), true);
 
-			if ($html != false)
+			if ($html !== false)
 			{
+				if (JCH_DEBUG)
+				{
+					$tag = '<!-- Cached by JCH Optimize --> </body>';
+					$html = str_replace('</body>', $tag, $html);
+				}
 
 				while (@ob_end_clean());
 				echo $html;
@@ -68,8 +68,8 @@ class Pagecache
 		{
 			$parts = array();
 
-			$parts[] = Browser::getInstance()->getFontHash();
-			$parts[] = Uri::getInstance()->toString();
+			$parts[] = JchOptimizeBrowser::getInstance()->getFontHash();
+			$parts[] = JchPlatformUri::getInstance()->toString();
 
 			//Add a value to the array that will be used to determine the page cache id
 			//@TODO Remove function to platform codes
@@ -86,14 +86,7 @@ class Pagecache
 	{
 		if (self::isCachingEnabled())
 		{	
-			if (JCH_DEBUG)
-			{
-				$now = date('l, F d, Y h:i:s A');
-				$tag = '<!-- Cached by JCH Optimize on '. $now . ' GMT --> </body>';
-				$sHtml = str_replace('</body>', $tag, $sHtml);
-			}
-			
-			Cache::saveCache($sHtml, self::getPageCacheId());
+			JchPlatformCache::saveCache($sHtml, self::getPageCacheId());
 		}
 	}
 
@@ -101,7 +94,7 @@ class Pagecache
 	{
 		$cache_exclude = $params->get('cache_exclude', array());
 		
-		if (Helper::findExcludes($cache_exclude, Uri::getInstance()->toString()))
+		if (JchOptimizeHelper::findExcludes($cache_exclude, JchPlatformUri::getInstance()->toString()))
 		{
 			return true;
 		}
@@ -120,9 +113,9 @@ class Pagecache
 			return false;
 		}
 		
-		$params = Plugin::getPluginParams();
+		$params = JchPlatformPlugin::getPluginParams();
 
-		if ($params->get('cache_enable', '0') && Utility::isGuest() && !self::isExcluded($params))
+		if ($params->get('cache_enable', '0') && JchPlatformUtility::isGuest() && !self::isExcluded($params))
 		{
 			return true;
 		}

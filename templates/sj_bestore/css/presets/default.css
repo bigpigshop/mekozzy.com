@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2010 - 2018 JoomShaper
  * @license http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 or Later
  */
- body, .sp-preloader {
+body, .sp-preloader {
   background-color: #fff;
   color: #222;
 }
@@ -21,9 +21,6 @@
 }
 #sp-top-bar a {
   color: #222;
-}
-#sp-header {
-  /*background: #0345bf;*/
 }
 a {
   color: #ffd200;
@@ -53,7 +50,6 @@ a:hover, a:focus, a:active {
 }
 .sp-megamenu-parent > li > a {
   color: #252525;
-  width: max-content;
 }
 .sp-megamenu-parent > li:hover > a {
   background-color: #ffd200;
@@ -79,7 +75,6 @@ a:hover, a:focus, a:active {
 }
 #offcanvas-toggler > .fa {
   color: #252525;
-  padding-left: 20px;
 }
 #offcanvas-toggler > .fa:hover, #offcanvas-toggler > .fa:focus, #offcanvas-toggler > .fa:active {
   color: #ffd200;

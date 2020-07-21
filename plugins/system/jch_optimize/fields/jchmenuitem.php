@@ -20,9 +20,6 @@
  */
 defined('_JEXEC') or die;
 
-use JchOptimize\Platform\Utility;
-use JchOptimize\Core\FileRetriever;
-
 include_once dirname(dirname(__FILE__)) . '/jchoptimize/loader.php';
 
 /**
@@ -52,7 +49,7 @@ class JFormFieldJchmenuitem extends JFormFieldMenuitem
                 try
                 {
                         $this->checkPcreVersion();
-                        $oFileRetriever = FileRetriever::getInstance();
+                        $oFileRetriever = JchOptimizeFileRetriever::getInstance();
                 }
                 catch (Exception $ex)
                 {
@@ -117,7 +114,7 @@ class JFormFieldJchmenuitem extends JFormFieldMenuitem
                 $oDocument->addScriptVersion(JUri::root(true) . '/media/plg_jchoptimize/js/admin-utility.js', JCH_VERSION);
 
                 $uri         = clone JUri::getInstance();
-                $domain      = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port')) . Helper::getBaseFolder();
+                $domain      = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port')) . JchOptimizeHelper::getBaseFolder();
                 $plugin_path = 'plugins/system/jch_optimize/';
 
                 $ajax_url = JURI::getInstance()->toString() . '&jchajax=1';
@@ -139,7 +136,49 @@ JCHSCRIPT;
                 $oDocument->addStyleSheet('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css');
                 JHtml::script('plg_jchoptimize/jquery.collapsible.js', FALSE, TRUE);
 
+##<procode>##   
+
+                $domain = str_replace('/administrator', '', $domain);
+
+                $ajax_optimizeimages = $ajax_url . '&action=optimizeimages';
+                $ajax_filetree       = $ajax_url . '&action=filetree';
+
+                $oDocument->addStyleSheetVersion(JUri::root(true) . '/media/plg_jchoptimize/css/pro-jquery.filetree.css', JCH_VERSION);
+                $oDocument->addScriptVersion(JUri::root(true) . '/media/plg_jchoptimize/js/pro-jquery.filetree.js', JCH_VERSION);
+                $oDocument->addScriptVersion(JUri::root(true) . '/media/plg_jchoptimize/js/pro-admin-utility.js', JCH_VERSION);
+
+                JHtml::script('jui/jquery.ui.core.js', FALSE, TRUE);
+
+//                $ajax_url     = $domain . '/administrator/index.php?option=com_ajax&plugin=optimizeimages&format=raw';
+//                $fileTreePath = $domain . '/administrator/index.php?option=com_ajax&plugin=filetree&format=raw';
+
+                JHtml::stylesheet('plg_jchoptimize/pro-jquery-ui-progressbar.css', array(), TRUE);
+
+                JHtml::script('plg_jchoptimize/pro-jquery.ui.progressbar.js', FALSE, TRUE);
+
+                $message = addslashes(JchPlatformUtility::translate('Please select files or subfolders to optimize'));
+                $noproid = addslashes(JchPlatformUtility::translate('Please enter your Download ID on the Pro Options tab'));
+
+                $sScript = <<<JCHSCRIPT
                 
+jQuery(document).ready( function() {
+        jQuery("#file-tree-container").fileTree({
+                root: "",
+                script: "$ajax_filetree",
+                expandSpeed: 100,
+                collapseSpeed: 100,
+                multiFolder: false
+        }, function(file) {});
+});
+
+var jch_ajax_optimizeimages = '$ajax_optimizeimages';                        
+var jch_message = '$message';   
+var jch_noproid = '$noproid';        
+                        
+JCHSCRIPT;
+                $oDocument->addScriptDeclaration($sScript);
+
+##</procode>##                
         }
 
 }
