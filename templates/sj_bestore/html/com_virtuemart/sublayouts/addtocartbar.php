@@ -89,29 +89,27 @@ if (!VmConfig::get('use_as_catalog', 0)  ) { ?>
 			if ($product->orderable) {
 				$editable = 'text';
 			} ?>
-            
-            <span class="quantity-box">
-				
+			<?php
+			if(!empty($addtoCartButton)){
+				?><div class="iq-card-body"><span style="width: 100%;" class="addtocart-button">
+				<?php echo $addtoCartButton ?>
+                </span> </div><?php
+			} ?>
+            <span class="d-none quantity-box">
 				<input type="button" class="quantity-controls quantity-minus" value=" " />
-			
 				<input type="<?php echo $editable ?>" class="quantity-input js-recalculate" name="quantity[]"
                        data-errStr="<?php echo vmText::_ ('COM_VIRTUEMART_WRONG_AMOUNT_ADDED')?>"
                        value="<?php echo $init; ?>" <?php echo $maxOrder; ?> />
-		
 				<input type="button" class="quantity-controls quantity-plus" value=" " />
 			</span>
-			
-			<?php 
-
-			if(!empty($addtoCartButton)){
-				?><span class="addtocart-button">
-				<?php echo $addtoCartButton ?>
-                </span> <?php
-			} ?>
             <input type="hidden" name="virtuemart_product_id[]" value="<?php echo $product->virtuemart_product_id ?>"/>
             <noscript><input type="hidden" name="task" value="add"/></noscript> <?php
 		}
 	} ?>
-
     </div><?php
 } ?>
+<style>
+    .productdetails .content_product_detail .spacer-buy-area .addtocart-bar .addtocart-button input[name="addtocart"]{
+        width: 100%;
+    }
+</style>

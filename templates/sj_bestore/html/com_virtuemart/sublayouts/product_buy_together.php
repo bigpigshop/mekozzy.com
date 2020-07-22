@@ -9,7 +9,7 @@
 	$product = $viewData['product'];
 	$currency = $viewData['currency'];
 ?>
-<div class="iq-card center">
+<div class="iq-card center" style="margin: 10px;">
     <div class="iq-card-header d-flex justify-content-between">
         <div class="iq-header-title">
             <h4 class="card-title">Sản phẩm thường được mua cùng : </h4>

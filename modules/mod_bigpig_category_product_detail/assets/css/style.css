@@ -138,7 +138,8 @@ a:hover { text-decoration: none; }
                                   Countdown
 -----------------------------------------------------------------------*/
 .iq-comingsoon { margin-top: 80px; }
-.countdown { margin: 60px 0 0; padding: 0; }
+/*.countdown { margin: 60px 0 0; padding: 0; }*/
+.countdown {padding: 0; }
 /* .countdown li { margin: 0 30px 0 0; padding: 45px 0; list-style: none; width: 22.8%; display: inline-block; text-align: center; line-height: normal; background: var(--iq-white); float: left; color: var(--iq-body-text); border-radius: 15px; } */
 .countdown li { margin: 0 30px 0 0; list-style: none; width: 22.8%; display: inline-block; text-align: center; line-height: normal; background: var(--iq-white); float: left; color: var(--iq-body-text); border-radius: 15px;font-size: 10px; }
 /*.countdown li span { font-size: 60px; display: inline-block; width: 100%; color: var(--iq-primary); }*/

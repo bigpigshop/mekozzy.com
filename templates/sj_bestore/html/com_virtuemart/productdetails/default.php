@@ -51,147 +51,101 @@ jQuery(document).ready(function() { // GALT: Start listening for dynamic content
 		// } // Product Navigation END
 	?>
 	<div class="product_detail row">
-		<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 clear_xs">
-			<?php echo $this->loadTemplate('images'); ?>
+		<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 clear_xs">
+            <div class="row">
+	            <?php echo $this->loadTemplate('images'); ?>
+	            <?php
+		            //<!-- START API CALL BOXME -->
+		            echo shopFunctionsF::renderVmSubLayout('call_api_boxme_fee', array('product' => $this->product, 'currency' => $this->currency));
+		            // <!-- END API CALL BOXME -->
+	            ?>
+            </div>
 		</div>
-		<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 clear_xs">
-			<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 clear_xs">
-				<div class="content_product_detail">
-					<?php // Back To Category Button
-						if ($this->product->virtuemart_category_id) {
-							$catURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $this->product->virtuemart_category_id, FALSE);
-							$categoryName = $this->product->category_name;
-						} else {
-							$catURL = JRoute::_('index.php?option=com_virtuemart');
-							$categoryName = vmText::_('COM_VIRTUEMART_SHOP_HOME');
+		<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 clear_xs">
+            <div class="content_product_detail">
+				<?php // Back To Category Button
+					if ($this->product->virtuemart_category_id) {
+						$catURL = JRoute::_('index.php?option=com_virtuemart&view=category&virtuemart_category_id=' . $this->product->virtuemart_category_id, FALSE);
+						$categoryName = $this->product->category_name;
+					} else {
+						$catURL = JRoute::_('index.php?option=com_virtuemart');
+						$categoryName = vmText::_('COM_VIRTUEMART_SHOP_HOME');
+					}
+				?>
+				
+				<?php // afterDisplayTitle Event
+					echo $this->product->event->afterDisplayTitle ?>
+				
+				<?php
+					// Product Edit Link
+					echo $this->edit_link;
+					// Product Edit Link END
+				?>
+				<?php
+					// PDF - Print - Email Icon
+					if (VmConfig::get('show_emailfriend') || VmConfig::get('show_printicon') || VmConfig::get('pdf_icon')) {
+						?>
+                        <div class="icons">
+							<?php
+								
+								$link = 'index.php?tmpl=component&option=com_virtuemart&view=productdetails&virtuemart_product_id=' . $this->product->virtuemart_product_id;
+								
+								echo $this->linkIcon($link . '&format=pdf', 'COM_VIRTUEMART_PDF', 'pdf_button', 'pdf_icon', false);
+								//echo $this->linkIcon($link . '&print=1', 'COM_VIRTUEMART_PRINT', 'printButton', 'show_printicon');
+								echo $this->linkIcon($link . '&print=1', 'COM_VIRTUEMART_PRINT', 'printButton', 'show_printicon', false, true, false, 'class="printModal"');
+								$MailLink = 'index.php?option=com_virtuemart&view=productdetails&task=recommend&virtuemart_product_id=' . $this->product->virtuemart_product_id . '&virtuemart_category_id=' . $this->product->virtuemart_category_id . '&tmpl=component';
+								echo $this->linkIcon($MailLink, 'COM_VIRTUEMART_EMAIL', 'emailButton', 'show_emailfriend', false, true, false, 'class="recommened-to-friend"');
+							?>
+                            <div class="clearfix"></div>
+                        </div>
+					<?php }
+					// PDF - Print - Email Icon END
+				?>
+				
+				<?php
+					echo shopFunctionsF::renderVmSubLayout('prices', array('product' => $this->product, 'currency' => $this->currency));
+					//			            echo shopFunctionsF::renderVmSubLayout('rating',array('showRating'=>$this->showRating,'product'=>$this->product));
+					echo shopFunctionsF::renderVmSubLayout('countdown', array('product' => $this->product, 'currency' => $this->currency));
+					echo shopFunctionsF::renderVmSubLayout('progress_sold', array('product' => $this->product, 'currency' => $this->currency));
+				?>
+
+				<?php
+					// Product Short Description
+					if (!empty($this->product->product_s_desc)) {
+						?>
+                        <div class="iq-card"style="margin: 10px">
+                            <div class="iq-card-body">
+                                <dl class="row">
+                                    <dt class="col-sm-3" >Thông tin Sản Phẩm</dt>
+                                    <dd class="col-sm-9" id="product_s_desc" ><?php echo nl2br($this->product->product_s_desc); ?></dd>
+                                </dl>
+                            </div>
+                        </div>
+						<?php
+					} // Product Short Description END
+				?>
+                <div class="spacer-buy-area">
+					<?php
+						echo shopFunctionsF::renderVmSubLayout('addtocart', array('product' => $this->product));
+						if (VmConfig::get('ask_question', 0) == 1) {
+							$askquestion_url = JRoute::_('index.php?option=com_virtuemart&view=productdetails&task=askquestion&virtuemart_product_id=' . $this->product->virtuemart_product_id . '&virtuemart_category_id=' . $this->product->virtuemart_category_id . '&tmpl=component', FALSE);
+							?>
+                            <div class="form-group">
+                                <a class="ask-a-question button" href="<?php echo $askquestion_url ?>"
+                                   rel="nofollow"><?php echo vmText::_('COM_VIRTUEMART_PRODUCT_ENQUIRY_LBL') ?></a>
+                            </div>
+							<?php
 						}
 					?>
-					
-					<?php // afterDisplayTitle Event
-						echo $this->product->event->afterDisplayTitle ?>
-					
-					<?php
-						// Product Edit Link
-						echo $this->edit_link;
-						// Product Edit Link END
-					?>
-					<?php
-						// PDF - Print - Email Icon
-						if (VmConfig::get('show_emailfriend') || VmConfig::get('show_printicon') || VmConfig::get('pdf_icon')) {
-							?>
-							<div class="icons">
-								<?php
-									
-									$link = 'index.php?tmpl=component&option=com_virtuemart&view=productdetails&virtuemart_product_id=' . $this->product->virtuemart_product_id;
-									
-									echo $this->linkIcon($link . '&format=pdf', 'COM_VIRTUEMART_PDF', 'pdf_button', 'pdf_icon', false);
-									//echo $this->linkIcon($link . '&print=1', 'COM_VIRTUEMART_PRINT', 'printButton', 'show_printicon');
-									echo $this->linkIcon($link . '&print=1', 'COM_VIRTUEMART_PRINT', 'printButton', 'show_printicon', false, true, false, 'class="printModal"');
-									$MailLink = 'index.php?option=com_virtuemart&view=productdetails&task=recommend&virtuemart_product_id=' . $this->product->virtuemart_product_id . '&virtuemart_category_id=' . $this->product->virtuemart_category_id . '&tmpl=component';
-									echo $this->linkIcon($MailLink, 'COM_VIRTUEMART_EMAIL', 'emailButton', 'show_emailfriend', false, true, false, 'class="recommened-to-friend"');
-								?>
-								<div class="clearfix"></div>
-							</div>
-						<?php }
-						// PDF - Print - Email Icon END
-					?>
-					
-					<?php
-						echo shopFunctionsF::renderVmSubLayout('prices', array('product' => $this->product, 'currency' => $this->currency));
-						//			            echo shopFunctionsF::renderVmSubLayout('rating',array('showRating'=>$this->showRating,'product'=>$this->product));
-						echo shopFunctionsF::renderVmSubLayout('countdown', array('product' => $this->product, 'currency' => $this->currency));
-						echo shopFunctionsF::renderVmSubLayout('progress_sold', array('product' => $this->product, 'currency' => $this->currency));
-					?>
-					<div class="product-info product_meta">
-						<?php
-							// echo shopFunctionsF::renderVmSubLayout('stockhandle', array('product' => $this->product));
-							// Product Sku
-							if (!empty($this->product->product_sku)) { ?>
-								<!-- <p class="btn mb-3 btn-primary mt-3"><span
-											class="text"><?php //echo JText::_('COM_VIRTUEMART_PRODUCT_SKU'); ?></span>: <?php //echo $this->product->product_sku; ?>
-								</p> -->
-							<?php } ?>
-					</div>
-					<?php
-						// Manufacturer of the Product
-						if (VmConfig::get('show_manufacturers', 1) && !empty($this->product->virtuemart_manufacturer_id))
-						{
-						    ?>
-							<!-- <div class="btn mb-3 btn-primary mt-3">
-								<?php //echo $this->loadTemplate('manufacturer'); ?>
-							</div> -->
-						<?php }
-						// Product Short Description
-						if (!empty($this->product->product_s_desc)) {
-							?>
-							<div class="iq-card">
-								<div class="iq-card-body">
-									<dl class="row">
-										<dt class="col-sm-3" >Thông tin Sản Phẩm</dt>
-										<dd class="col-sm-9" id="product_s_desc" ><?php echo nl2br($this->product->product_s_desc); ?></dd>
-									</dl>
-								</div>
-							</div>
-							<?php
-						} // Product Short Description END
-					?>
-                    <?php
-                        //<!-- START API CALL BOXME -->
-	                    echo shopFunctionsF::renderVmSubLayout('call_api_boxme_fee', array('product' => $this->product, 'currency' => $this->currency));
-	                    // <!-- END API CALL BOXME -->
-                    ?>
-                   
-					<div class="spacer-buy-area">
-						<?php
-							echo shopFunctionsF::renderVmSubLayout('addtocart', array('product' => $this->product));
-							if (VmConfig::get('ask_question', 0) == 1) {
-								$askquestion_url = JRoute::_('index.php?option=com_virtuemart&view=productdetails&task=askquestion&virtuemart_product_id=' . $this->product->virtuemart_product_id . '&virtuemart_category_id=' . $this->product->virtuemart_category_id . '&tmpl=component', FALSE);
-								?>
-								<div class="form-group">
-									<a class="ask-a-question button" href="<?php echo $askquestion_url ?>"
-									   rel="nofollow"><?php echo vmText::_('COM_VIRTUEMART_PRODUCT_ENQUIRY_LBL') ?></a>
-								</div>
-								<?php
-							}
-						?>
-					</div>
-
-                        <!-- start social-share-->
-<!--					<div class="social-share">-->
-<!--						<h4 class="title-share">--><?php //echo JText::_('COM_VM_SHARE_THIS'); ?><!--</h4>-->
-<!--						<div class="wrap-content">-->
-<!--							<a href="#" title="Ut enim ad mini"-->
-<!--							   onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i-->
-<!--										class="fa fa-facebook"></i></a>-->
-<!--							<a href="#"-->
-<!--							   onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i-->
-<!--										class="fa fa-twitter"></i></a>-->
-<!--							<a href="#"-->
-<!--							   onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i-->
-<!--										class="fa fa-google-plus"></i></a>-->
-<!--						</div>-->
-<!--					</div>-->
-                    <!-- end social-share-->
-					<?php
-						//<!-- 3 product thuong dc mua kem theo  -->
-						echo shopFunctionsF::renderVmSubLayout('product_buy_together', array('product' => $this->product, 'currency' => $this->currency));
-						//<!-- 3 product thuong dc mua kem theo  -->
-					?>
-					
-					<?php
-						//<!-- related_products  -->
-//						echo shopFunctionsF::renderVmSubLayout('related_products', array('product' => $this->product, 'currency' => $this->currency));
-						//<!-- related_products  -->
-					?>
-                    
-                    
-					<div class="clear"></div>
-				</div>
-
-			</div>
-			<div class="col-lg-4 col-md-8 col-sm-12 col-xs-12 clear_xs">
-				<?php echo shopFunctionsF::renderVmSubLayout('vendor_store', array('product' => $this->product, 'currency' => $this->currency)); ?>
-			</div>
+                </div>
+                <?php
+		            //<!-- 3 product thuong dc mua kem theo  -->
+		            echo shopFunctionsF::renderVmSubLayout('product_buy_together', array('product' => $this->product, 'currency' => $this->currency));
+		            //<!-- 3 product thuong dc mua kem theo  -->
+	            ?>
+                
+                <div class="clear"></div>
+            </div>
 		</div>
 	</div>
     
@@ -213,13 +167,6 @@ jQuery(document).ready(function() { // GALT: Start listening for dynamic content
 
 	<div id="yt_tab_products" class="tab-product-detail">
 		<div class="tab-product">
-			<ul class="nav nav-tabs" id="add-reviews">
-				<li class="active"><a href="#description"
-									  data-toggle="tab"><span><?php echo vmText::_('COM_VIRTUEMART_PRODUCT_DESC_TITLE') ?></span></a>
-				</li>
-<!--				<li><a href="#reviews" data-toggle="tab"><span>--><?php //echo vmText::_('COM_VIRTUEMART_REVIEWS') ?><!--</span></a>-->
-<!--				</li>-->
-			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="description">
 					

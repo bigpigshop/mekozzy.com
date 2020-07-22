@@ -11,24 +11,30 @@
 	 */
 	defined('_JEXEC') or die('Restricted access');
 	$product = $viewData['product'];
+	$currency = $viewData['currency'];
 	$position = $viewData['position'];
-	foreach ($product->customfieldsSorted['addtocart'] as $fied)
-	{
-		if($fied->custom_title == 'other_promotions')
-		{
+	foreach ($product->customfieldsSorted['addtocart'] as $fied) {
+		if ($fied->custom_title == 'other_promotions') {
 			$da = $fied->customfield_value;
 		}
 	}
 ?>
-<div class="iq-card">
-	<div class="iq-card-header d-flex justify-content-between">
-		<div class="iq-header-title">
-			<h4 class="card-title">Các Uư Đãi khác</h4>
-		</div>
-	</div>
-	<div class="iq-card-body">
-		<ul class="iq-timeline">
-			<?php echo $da; ?>
-		</ul>
-	</div>
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 clear_xs">
+        <div class="iq-card">
+            <div class="iq-card-header d-flex justify-content-between">
+                <div class="iq-header-title">
+                    <h4 class="card-title">Các Uư Đãi khác</h4>
+                </div>
+            </div>
+            <div class="iq-card-body">
+                <ul class="iq-timeline">
+					<?php echo $da; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 clear_xs">
+		<?php echo shopFunctionsF::renderVmSubLayout('vendor_store', array('product' => $product, 'currency' => $currency)); ?>
+    </div>
 </div>

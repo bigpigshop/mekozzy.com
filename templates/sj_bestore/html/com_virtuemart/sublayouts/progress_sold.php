@@ -13,15 +13,9 @@
 		if($fied->custom_title == 'progress_sold')
 		{
 ?>
-        <div class="row mt-3">
-            <p>Đã Bán : <?php echo $fied->customfield_value ?> sản phẩm</p>
-
-        </div>
-        <!-- <div class="progress mb-3" style="height: 25px">
-
-            <div class="progress-bar" role="progressbar" style="width: <?php echo $fied->customfield_value ?>%;"
-                 aria-valuenow="50" aria-valuemin="0"
-                 aria-valuemax="100"><?php //echo $fied->customfield_value ?></div>
-
-        </div> -->
+<div class="iq-card" style="margin: 10px">
+	<div class="row mt-3 ml-3 pt-3">
+		<p>Đã Bán : <?php echo $fied->customfield_value ?> sản phẩm</p>
+	</div>
+</div>
 <?php }} ?>
